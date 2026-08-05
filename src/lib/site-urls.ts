@@ -1,0 +1,25 @@
+import { HTMT_API_SUBDOMAIN, ORG_DOMAIN } from "@behindthemusictree/brand";
+import { buildBackendBaseUrl } from "@behindthemusictree/app-kit/transport";
+
+function isProductionEnv(): boolean {
+  return process.env.NEXT_PUBLIC_VERCEL_ENV === "production";
+}
+
+/**
+ * HearTheMusicTree API base URL. Off Vercel (no `NEXT_PUBLIC_VERCEL_ENV`), honors
+ * `NEXT_PUBLIC_BACKEND_BASE_URL` as a local/remote dev override; Vercel always sets that var,
+ * so a stale value left over in a Vercel project's env settings can never shadow this on a deployment.
+ */
+export function getBackendBaseUrl(): string {
+  if (!HTMT_API_SUBDOMAIN) throw new Error("HTMT_API_SUBDOMAIN is required");
+  if (!ORG_DOMAIN) throw new Error("ORG_DOMAIN is required");
+  const apiRootSegment = process.env.NEXT_PUBLIC_HTMT_API_ROOT_SEGMENT;
+  if (!apiRootSegment) throw new Error("NEXT_PUBLIC_HTMT_API_ROOT_SEGMENT is required");
+  return buildBackendBaseUrl({
+    apiSubdomain: HTMT_API_SUBDOMAIN,
+    orgDomain: ORG_DOMAIN,
+    apiRootSegment,
+    isProduction: isProductionEnv(),
+    overrideUrl: !process.env.NEXT_PUBLIC_VERCEL_ENV ? process.env.NEXT_PUBLIC_BACKEND_BASE_URL : undefined,
+  });
+}

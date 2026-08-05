@@ -1,0 +1,45 @@
+import * as Sentry from "@sentry/nextjs";
+import { getBackendBaseUrl } from "@lib/site-urls";
+
+export function initSentry() {
+  if (process.env.NEXT_PUBLIC_SENTRY_IS_ACTIVE !== "true") {
+    return;
+  }
+
+  const isBrowser = typeof window !== "undefined";
+
+  if (!isBrowser) {
+    return;
+  }
+
+  try {
+    const integrations = [];
+
+    if (typeof Sentry.browserTracingIntegration === "function") {
+      integrations.push(Sentry.browserTracingIntegration());
+    }
+
+    if (typeof Sentry.replayIntegration === "function") {
+      integrations.push(Sentry.replayIntegration());
+    }
+
+    const tracesSampleRate = Number(process.env.NEXT_PUBLIC_SENTRY_TRACES_SAMPLE_RATE) || 0.1;
+    const replaysSessionSampleRate = Number(process.env.NEXT_PUBLIC_SENTRY_REPLAY_SESSION_SAMPLE_RATE) || 0.1;
+    const replaysOnErrorSampleRate = Number(process.env.NEXT_PUBLIC_SENTRY_REPLAY_ON_ERROR_SAMPLE_RATE) || 1.0;
+
+    Sentry.init({
+      dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
+      integrations,
+      tracesSampleRate,
+      tracePropagationTargets: [
+        "localhost",
+        new RegExp(`^${getBackendBaseUrl().replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}`),
+      ],
+      replaysSessionSampleRate,
+      replaysOnErrorSampleRate,
+      enabled: process.env.NEXT_PUBLIC_SENTRY_IS_ACTIVE === "true",
+    });
+  } catch (error) {
+    console.error("Failed to initialize Sentry:", error);
+  }
+}

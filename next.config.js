@@ -1,0 +1,49 @@
+/** @type {import('next').NextConfig} */
+
+const path = require("path");
+
+const nextConfig = {
+  images: { unoptimized: true },
+  transpilePackages: ["@behindthemusictree/assets"],
+  reactStrictMode: false,
+  productionBrowserSourceMaps: true,
+  turbopack: {
+    root: path.resolve(__dirname),
+    resolveAlias: {
+      "@app": "./src/app",
+      "@assets": "./src/assets",
+      "@components": "./src/components",
+      "@hooks": "./src/hooks",
+      "@lib": "./src/lib",
+      "@utils": "./src/lib/utils",
+    },
+  },
+};
+
+const REQUIRED_ENV_VARS = [
+  "NEXT_PUBLIC_CONTACT_EMAIL",
+  "NEXT_PUBLIC_SPOTIFY_CLIENT_ID",
+  "NEXT_PUBLIC_SPOTIFY_SCOPES",
+  "NEXT_PUBLIC_SPOTIFY_REDIRECT_URI",
+  "NEXT_PUBLIC_GOOGLE_CLIENT_ID",
+  "NEXT_PUBLIC_GOOGLE_REDIRECT_URI",
+  "NEXT_PUBLIC_TRACK_UPLOAD_TIMEOUT_MS",
+];
+
+module.exports = (phase, defaultConfig) => {
+  const missing = REQUIRED_ENV_VARS.filter((key) => {
+    const value = process.env[key];
+    return !value || value.trim() === "";
+  });
+  // Backend URL is either an explicit override (NEXT_PUBLIC_BACKEND_BASE_URL, used for local/remote
+  // API dev presets) or computed from NEXT_PUBLIC_HTMT_API_ROOT_SEGMENT (see src/lib/site-urls.ts).
+  if (!process.env.NEXT_PUBLIC_BACKEND_BASE_URL && !process.env.NEXT_PUBLIC_HTMT_API_ROOT_SEGMENT) {
+    missing.push("NEXT_PUBLIC_BACKEND_BASE_URL or NEXT_PUBLIC_HTMT_API_ROOT_SEGMENT");
+  }
+  if (missing.length > 0) {
+    throw new Error(
+      `Missing required environment variable(s): ${missing.join(", ")}. Set them in .env, .env.local, .env.development, or .env.production.`,
+    );
+  }
+  return nextConfig;
+};

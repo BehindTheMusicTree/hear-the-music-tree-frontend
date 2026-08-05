@@ -1,0 +1,33 @@
+export const PATHS = {
+  ME_GENRE_TREE: "/me-genre-tree",
+  ME_GENRE_PLAYLISTS: "/me-genre-playlists",
+  ME_UPLOADED_LIBRARY: "/me-uploaded-library",
+};
+
+export const LOGOUT_REDIRECT_PATH = PATHS.ME_GENRE_TREE;
+
+export type RouteAuthRequirement = false | "any" | "spotify";
+
+export interface RouteAuthConfigItem {
+  path: string;
+  authRequired: RouteAuthRequirement;
+  label: string;
+  hiddenFromMenu?: boolean;
+}
+
+export const AUTH_CONFIG: readonly RouteAuthConfigItem[] = [
+  { path: PATHS.ME_GENRE_TREE, authRequired: "any", label: "MyMusicTree" },
+  { path: PATHS.ME_GENRE_PLAYLISTS, authRequired: "any", label: "My Genre Playlists" },
+  { path: PATHS.ME_UPLOADED_LIBRARY, authRequired: "any", label: "My Library" },
+];
+
+/** Still in {@link AUTH_CONFIG} for auth; omitted from the main header nav. */
+export const PATHS_EXCLUDED_FROM_HEADER_NAV: ReadonlySet<string> = new Set([]);
+
+export function getRouteAuthRequirement(pathname: string): RouteAuthRequirement {
+  if (pathname === "/") return false;
+  const entry = AUTH_CONFIG.find((r) => pathname === r.path || pathname.startsWith(`${r.path}/`));
+  return entry?.authRequired ?? false;
+}
+
+export const spotifyUserProfileUrl = (spotifyUserId: string) => `https://open.spotify.com/user/${spotifyUserId}`;
