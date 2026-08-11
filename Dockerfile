@@ -4,7 +4,11 @@ WORKDIR /app
 RUN corepack enable && corepack prepare pnpm@10.33.2 --activate
 COPY package.json pnpm-lock.yaml .npmrc ./
 RUN --mount=type=secret,id=GH_PACKAGES_TOKEN_READ \
-    NPM_TOKEN="$(cat /run/secrets/GH_PACKAGES_TOKEN_READ 2>/dev/null)" pnpm install --frozen-lockfile
+    if [ ! -s /run/secrets/GH_PACKAGES_TOKEN_READ ]; then \
+        echo "ERROR: GH_PACKAGES_TOKEN_READ build secret is not provided" >&2; \
+        exit 1; \
+    fi && \
+    NPM_TOKEN="$(cat /run/secrets/GH_PACKAGES_TOKEN_READ)" pnpm install --frozen-lockfile
 COPY . .
 RUN pnpm build
 
