@@ -15,8 +15,8 @@ importers:
         specifier: 11.5.2
         version: 11.5.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@behindthemusictree/genre-tree-view':
-        specifier: 0.1.0
-        version: 0.1.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+        specifier: 0.3.0
+        version: 0.3.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@sentry/nextjs':
         specifier: 10.38.0
         version: 10.38.0(@opentelemetry/context-async-hooks@2.10.0(@opentelemetry/api@1.9.1))(@opentelemetry/core@2.10.0(@opentelemetry/api@1.9.1))(@opentelemetry/sdk-trace-base@2.10.0(@opentelemetry/api@1.9.1))(next@16.2.3(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)(webpack@5.109.2(postcss@8.5.3))
@@ -263,12 +263,6 @@ packages:
 
   '@behindthemusictree/brand@11.5.2':
     resolution: {integrity: sha512-hAdvojq9eJF4PdXSuO7Wgsd7Ac0SEtBPnX9G9Kq51E8jIRI0Sbad25iW4nuLZE5pyJNoxoXmNdfQYS5j2HOBww==, tarball: https://npm.pkg.github.com/download/@behindthemusictree/brand/11.5.2/55e6b083518627f84521a3b12ea5d1a2e2eb5065}
-    peerDependencies:
-      react: '>=18.0.0'
-      react-dom: '>=18.0.0'
-
-  '@behindthemusictree/genre-tree-view@0.1.0':
-    resolution: {integrity: sha512-32cjGoewDAAH0zFQSh8K2PoaucwRlwgfJOSYLji6MkQk8a7Fjp3Ckl1l+buVD3T/QyRD4zw+hSuWadp9RR+NnA==, tarball: https://npm.pkg.github.com/download/@behindthemusictree/genre-tree-view/0.1.0/9fad99b6dc5884b0a9e8616cdca667d8f1c810dc}
     peerDependencies:
       react: '>=18.0.0'
       react-dom: '>=18.0.0'
@@ -4323,13 +4317,6 @@ snapshots:
     dependencies:
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
-
-  '@behindthemusictree/genre-tree-view@0.1.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
-    dependencies:
-      d3: 7.8.5
-      react: 19.1.0
-      react-dom: 19.1.0(react@19.1.0)
-      react-icons: 5.5.0(react@19.1.0)
 
   '@behindthemusictree/genre-tree-view@0.3.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
     dependencies:
