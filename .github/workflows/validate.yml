@@ -1,0 +1,112 @@
+# pnpm install needs GH_PACKAGES_TOKEN_READ: GITHUB_TOKEN cannot read @behindthemusictree/* when published from another repo (403 read_package).
+name: Validate
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+env:
+  NPM_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN_READ }}
+
+jobs:
+  ensure-packages-token:
+    name: GitHub Packages token
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require GH_PACKAGES_TOKEN_READ secret
+        run: |
+          if [ -z "$NPM_TOKEN" ]; then
+            echo "::error::Repository secret GH_PACKAGES_TOKEN_READ is required. Add a GitHub PAT with read:packages (and org SSO if applicable) so pnpm install can install @behindthemusictree/*. GITHUB_TOKEN cannot read packages published from other repositories (403 permission_denied: read_package)."
+            exit 1
+          fi
+
+  lint:
+    name: Lint Code
+    runs-on: ubuntu-latest
+    needs: [ensure-packages-token]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: "10.33.2"
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run linter
+        run: pnpm run lint
+
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    needs: [ensure-packages-token]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: "10.33.2"
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run tests
+        run: pnpm exec vitest run --passWithNoTests
+
+  build-check:
+    name: Build Check
+    runs-on: ubuntu-latest
+    needs: [lint, test]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: "10.33.2"
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build application
+        env:
+          NEXT_PUBLIC_CONTACT_EMAIL: ci@example.com
+          NEXT_PUBLIC_HTMT_API_ROOT_SEGMENT: v2
+          NEXT_PUBLIC_SPOTIFY_CLIENT_ID: ci-placeholder
+          NEXT_PUBLIC_SPOTIFY_SCOPES: ci-placeholder
+          NEXT_PUBLIC_SPOTIFY_REDIRECT_URI: https://ci.example.com/auth/spotify/callback
+          NEXT_PUBLIC_GOOGLE_CLIENT_ID: ci-placeholder.apps.googleusercontent.com
+          NEXT_PUBLIC_GOOGLE_REDIRECT_URI: https://ci.example.com/auth/google/callback
+          NEXT_PUBLIC_TRACK_UPLOAD_TIMEOUT_MS: "300000"
+        run: pnpm run build
