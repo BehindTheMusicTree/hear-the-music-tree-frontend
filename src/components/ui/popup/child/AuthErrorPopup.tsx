@@ -2,7 +2,7 @@
 
 import { AlertCircle } from "lucide-react";
 import { BasePopup, BasePopupProps } from "@behindthemusictree/app-kit/popup";
-import { Button } from "@behindthemusictree/app-kit/ui";
+import { Button } from "@behindthemusictree/ui";
 
 type AuthErrorPopupProps = Omit<BasePopupProps, "title" | "children" | "icon" | "isDismissable"> & {
   message: string;

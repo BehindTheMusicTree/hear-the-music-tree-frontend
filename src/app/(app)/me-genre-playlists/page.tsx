@@ -2,7 +2,7 @@
 
 import { useState, useMemo, ChangeEvent } from "react";
 import { useListFullGenrePlaylists } from "@behindthemusictree/app-kit/genre-tree";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow, Skeleton, Input } from "@behindthemusictree/app-kit/ui";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow, Skeleton, Input } from "@behindthemusictree/ui";
 import Page from "@components/ui/Page";
 import { getBackendBaseUrl } from "@lib/site-urls";
 
