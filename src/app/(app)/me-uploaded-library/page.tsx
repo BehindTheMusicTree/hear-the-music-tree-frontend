@@ -3,8 +3,8 @@
 import { FaRegClock } from "react-icons/fa";
 
 import { usePlayer } from "@behindthemusictree/app-kit/player";
-import { usePopup } from "@behindthemusictree/app-kit/popup";
-import { TrackUploadPopup, UploadButtons } from "@behindthemusictree/app-kit/ui";
+import { usePopup, TrackUploadPopup } from "@behindthemusictree/app-kit/popup";
+import { UploadButtons } from "@behindthemusictree/ui";
 import {
   Rating,
   UploadedTrackPositionPlayPause,
