@@ -51,11 +51,11 @@ export default function Player({ className }: PlayerProps) {
   };
 
   const handlePrevious = () => {
-    if (!playerTrackObject?.audioElement) return;
+    if (!playerTrackObject?.mediaController) return;
 
     // If we're at least 1 second into the track, restart the current song
     if (currentTime >= 1) {
-      playerTrackObject.audioElement.currentTime = 0;
+      playerTrackObject.mediaController.setCurrentTime(0);
       return;
     }
 
@@ -71,27 +71,20 @@ export default function Player({ className }: PlayerProps) {
 
   const handleVolumeChange = (newVolume: number) => {
     setVolume(newVolume);
-    // Update audio element volume if it exists
-    if (playerTrackObject?.audioElement) {
-      playerTrackObject.audioElement.volume = newVolume / 100;
-    }
+    playerTrackObject?.mediaController?.setVolume(newVolume);
   };
 
   const handleVolumeToggle = () => {
     if (isMuted) {
       // Unmute: restore previous volume
       setVolume(previousVolume);
-      if (playerTrackObject?.audioElement) {
-        playerTrackObject.audioElement.volume = previousVolume / 100;
-      }
+      playerTrackObject?.mediaController?.setVolume(previousVolume);
       setIsMuted(false);
     } else {
       // Mute: save current volume and set to 0
       setPreviousVolume(volume);
       setVolume(0);
-      if (playerTrackObject?.audioElement) {
-        playerTrackObject.audioElement.volume = 0;
-      }
+      playerTrackObject?.mediaController?.setVolume(0);
       setIsMuted(true);
     }
   };
