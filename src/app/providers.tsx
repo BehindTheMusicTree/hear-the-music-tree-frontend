@@ -18,7 +18,7 @@ interface ProvidersProps {
   children: NonNullable<ReactNode>;
 }
 
-const PLAYER_SCOPE: Scope = "me";
+const PLAYER_SCOPE = "me" as const satisfies Scope;
 
 function useLoadTrack(): (trackId: string) => Promise<PlayerTrack> {
   const { fetch } = useFetchWrapper(getBackendBaseUrl);
@@ -44,6 +44,7 @@ function useLoadTrack(): (trackId: string) => Promise<PlayerTrack> {
       }
       const blob = new Blob([data], { type: "audio/mpeg" });
       return {
+        kind: "audio",
         id: trackId,
         streamUrl: URL.createObjectURL(blob),
         title: track.title,
