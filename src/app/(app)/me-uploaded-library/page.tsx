@@ -20,7 +20,9 @@ import { getBackendBaseUrl } from "@lib/site-urls";
 
 export default function UploadedLibraryPage() {
   const { data: uploadedTracksResponse } = useListTracks("me", getBackendBaseUrl);
-  const uploadedTracks = uploadedTracksResponse?.results || [];
+  const uploadedTracks = (uploadedTracksResponse?.results || []).filter(
+    (track): track is UploadedTrackDetailed => track.kind === "uploaded",
+  );
   const { playerTrackObject, handlePlayPauseAction } = usePlayer();
   const { showPopup, hidePopup } = usePopup();
   const { playNewTrackListFromTrackUuid } = useTrackList();
