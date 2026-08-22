@@ -9,7 +9,7 @@ import {
   Rating,
   TrackPositionPlayPause,
   useTrackList,
-  useListUploadedTracks,
+  useListTracks,
   useUploadTrack,
   formatTime,
   UploadedTrackDetailed,
@@ -19,7 +19,7 @@ import { getArtistsDisplay } from "@schemas/domain/artist/display";
 import { getBackendBaseUrl } from "@lib/site-urls";
 
 export default function UploadedLibraryPage() {
-  const { data: uploadedTracksResponse } = useListUploadedTracks("me", getBackendBaseUrl);
+  const { data: uploadedTracksResponse } = useListTracks("me", getBackendBaseUrl);
   const uploadedTracks = uploadedTracksResponse?.results || [];
   const { playerTrackObject, handlePlayPauseAction } = usePlayer();
   const { showPopup, hidePopup } = usePopup();

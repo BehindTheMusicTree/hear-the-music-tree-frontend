@@ -3,13 +3,7 @@
 import { useCallback, useEffect, useRef } from "react";
 
 import { usePopup } from "@behindthemusictree/app-kit/popup";
-import {
-  useCreateGenre,
-  useUpdateGenre,
-  useUploadTrack,
-  GenreTreeView,
-  CriteriaMinimum,
-} from "@behindthemusictree/app-kit/genre-tree";
+import { useCreateGenre, useUpdateGenre, GenreTreeView, CriteriaMinimum } from "@behindthemusictree/app-kit/genre-tree";
 import GenreCreationPopup from "@components/ui/popup/child/GenreCreationPopup";
 import GenreRenamePopup from "@components/ui/popup/child/GenreRenamePopup";
 import Page from "@components/ui/Page";
@@ -18,7 +12,6 @@ import { getBackendBaseUrl } from "@lib/site-urls";
 export default function GenreTreePage() {
   const { mutate: createGenre, formErrors } = useCreateGenre("me", getBackendBaseUrl);
   const { renameGenre, formErrors: renameFormErrors } = useUpdateGenre("me", getBackendBaseUrl);
-  const { mutateAsync: uploadTrackMutateAsync } = useUploadTrack("me", getBackendBaseUrl);
   const { showPopup, hidePopup } = usePopup();
 
   const showCriteriaCreationPopup = useCallback(
@@ -76,10 +69,6 @@ export default function GenreTreePage() {
         handleGenreCreationAction={showCriteriaCreationPopup}
         handleGenreRenameAction={showGenreRenamePopup}
         getBackendBaseUrl={getBackendBaseUrl}
-        uploadTrack={{
-          uploadTrack: uploadTrackMutateAsync,
-          uploadTimeoutMs: Number(process.env.NEXT_PUBLIC_TRACK_UPLOAD_TIMEOUT_MS),
-        }}
       />
     </Page>
   );
