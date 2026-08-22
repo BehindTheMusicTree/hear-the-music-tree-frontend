@@ -34,35 +34,35 @@ export default function Player({ className }: PlayerProps) {
     !!trackList &&
     !!selectedTrack &&
     (() => {
-      const tracks = trackList.uploadedTracks;
+      const tracks = trackList.tracks;
       const currentIndex = tracks.findIndex((t) => t.uuid === selectedTrack.uuid);
       return currentIndex !== -1 && currentIndex + 1 < tracks.length;
     })();
 
   const handleTrackChange = (track: PlayerTrack) => {
-    const found = trackList?.uploadedTracks.find((t) => t.uuid === track.id) ?? null;
+    const found = trackList?.tracks.find((t) => t.uuid === track.id) ?? null;
     setSelectedTrack(found);
   };
 
   const handleNext = () => {
     if (trackList && selectedTrack) {
-      handleNextTrack(trackList.uploadedTracks.map(toPlayerTrack), toPlayerTrack(selectedTrack), handleTrackChange);
+      handleNextTrack(trackList.tracks.map(toPlayerTrack), toPlayerTrack(selectedTrack), handleTrackChange);
     }
   };
 
   const handlePrevious = () => {
-    if (!playerTrackObject?.audioElement) return;
+    if (!playerTrackObject?.mediaController) return;
 
     // If we're at least 1 second into the track, restart the current song
     if (currentTime >= 1) {
-      playerTrackObject.audioElement.currentTime = 0;
+      playerTrackObject.mediaController.setCurrentTime(0);
       return;
     }
 
     // If less than 1 second, go to previous track
     if (trackList && selectedTrack) {
       handlePreviousTrack(
-        trackList.uploadedTracks.map(toPlayerTrack),
+        trackList.tracks.map(toPlayerTrack),
         toPlayerTrack(selectedTrack),
         handleTrackChange,
       );
@@ -71,27 +71,20 @@ export default function Player({ className }: PlayerProps) {
 
   const handleVolumeChange = (newVolume: number) => {
     setVolume(newVolume);
-    // Update audio element volume if it exists
-    if (playerTrackObject?.audioElement) {
-      playerTrackObject.audioElement.volume = newVolume / 100;
-    }
+    playerTrackObject?.mediaController?.setVolume(newVolume);
   };
 
   const handleVolumeToggle = () => {
     if (isMuted) {
       // Unmute: restore previous volume
       setVolume(previousVolume);
-      if (playerTrackObject?.audioElement) {
-        playerTrackObject.audioElement.volume = previousVolume / 100;
-      }
+      playerTrackObject?.mediaController?.setVolume(previousVolume);
       setIsMuted(false);
     } else {
       // Mute: save current volume and set to 0
       setPreviousVolume(volume);
       setVolume(0);
-      if (playerTrackObject?.audioElement) {
-        playerTrackObject.audioElement.volume = 0;
-      }
+      playerTrackObject?.mediaController?.setVolume(0);
       setIsMuted(true);
     }
   };

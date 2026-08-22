@@ -7,9 +7,9 @@ import { usePopup, TrackUploadPopup } from "@behindthemusictree/app-kit/popup";
 import { UploadButtons } from "@behindthemusictree/ui";
 import {
   Rating,
-  UploadedTrackPositionPlayPause,
+  TrackPositionPlayPause,
   useTrackList,
-  useListUploadedTracks,
+  useListTracks,
   useUploadTrack,
   formatTime,
   UploadedTrackDetailed,
@@ -19,11 +19,13 @@ import { getArtistsDisplay } from "@schemas/domain/artist/display";
 import { getBackendBaseUrl } from "@lib/site-urls";
 
 export default function UploadedLibraryPage() {
-  const { data: uploadedTracksResponse } = useListUploadedTracks("me", getBackendBaseUrl);
-  const uploadedTracks = uploadedTracksResponse?.results || [];
+  const { data: uploadedTracksResponse } = useListTracks("me", getBackendBaseUrl);
+  const uploadedTracks = (uploadedTracksResponse?.results || []).filter(
+    (track): track is UploadedTrackDetailed => track.kind === "uploaded",
+  );
   const { playerTrackObject, handlePlayPauseAction } = usePlayer();
   const { showPopup, hidePopup } = usePopup();
-  const { playNewTrackListFromUploadedTrackUuid } = useTrackList();
+  const { playNewTrackListFromTrackUuid } = useTrackList();
   const { mutateAsync: uploadTrackMutateAsync } = useUploadTrack("me", getBackendBaseUrl);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -49,7 +51,7 @@ export default function UploadedLibraryPage() {
     if (playerTrackObject && playerTrackObject.track.id === uploadedTrack.uuid) {
       handlePlayPauseAction();
     } else {
-      playNewTrackListFromUploadedTrackUuid(uploadedTrack, "me");
+      playNewTrackListFromTrackUuid(uploadedTrack, "me");
     }
   };
 
@@ -129,7 +131,7 @@ export default function UploadedLibraryPage() {
               {uploadedTracks.map((uploadedTrack, index) => (
                 <tr key={uploadedTrack.uuid} className="hover:bg-gray-50 group">
                   <td className="uploaded-library-item px-2 sm:px-3 py-2 text-center" style={{ width: "8%" }}>
-                    <UploadedTrackPositionPlayPause
+                    <TrackPositionPlayPause
                       position={index + 1}
                       uuid={uploadedTrack.uuid}
                       handlePlayPauseClick={() => handlePlayPauseClick(uploadedTrack)}

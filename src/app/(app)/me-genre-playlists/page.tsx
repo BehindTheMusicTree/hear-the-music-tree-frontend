@@ -112,7 +112,7 @@ export default function GenrePlaylistsPage() {
                     <TableCell className="font-medium">{criteriaPlaylist.name}</TableCell>
                     <TableCell>{criteriaPlaylist.parent?.name || "/"}</TableCell>
                     <TableCell>{criteriaPlaylist.root?.name}</TableCell>
-                    <TableCell>{criteriaPlaylist.uploadedTracksCount}</TableCell>
+                    <TableCell>{criteriaPlaylist.tracksCount}</TableCell>
                   </TableRow>
                 ))}
           </TableBody>
