@@ -12,9 +12,9 @@ describe("GenreRenamePopup", () => {
 
   it("submits the edited name when Save is clicked", () => {
     const onSubmit = vi.fn();
-    const { container } = render(<GenreRenamePopup onSubmit={onSubmit} genre={genre} />);
+    render(<GenreRenamePopup onSubmit={onSubmit} genre={genre} />);
 
-    const nameInput = container.querySelector('input[name="name"]') as HTMLInputElement;
+    const nameInput = document.body.querySelector('input[name="name"]') as HTMLInputElement;
     fireEvent.change(nameInput, { target: { value: "Metal" } });
     fireEvent.click(screen.getByText("Save"));
 

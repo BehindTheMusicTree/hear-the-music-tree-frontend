@@ -218,7 +218,7 @@ describe("Player", () => {
     useTrackListMock.mockReturnValue({ trackList, selectedTrack: trackList.tracks[0], setSelectedTrack });
 
     render(<Player />);
-    const [volumeSlider] = screen.getAllByRole("slider");
+    const volumeSlider = document.querySelector('input[type="range"].w-24') as HTMLInputElement;
     fireEvent.change(volumeSlider, { target: { value: "30" } });
 
     expect(setVolume).toHaveBeenCalledWith(30);

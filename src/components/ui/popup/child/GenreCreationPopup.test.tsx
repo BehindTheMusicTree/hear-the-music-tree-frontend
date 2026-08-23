@@ -15,9 +15,9 @@ describe("GenreCreationPopup", () => {
 
   it("submits the entered name and parent uuid when Save is clicked", () => {
     const onSubmit = vi.fn();
-    const { container } = render(<GenreCreationPopup onSubmit={onSubmit} parent={{ uuid: "p1", name: "Rock" } as any} />);
+    render(<GenreCreationPopup onSubmit={onSubmit} parent={{ uuid: "p1", name: "Rock" } as any} />);
 
-    const nameInput = container.querySelector('input[name="name"]') as HTMLInputElement;
+    const nameInput = document.body.querySelector('input[name="name"]') as HTMLInputElement;
     fireEvent.change(nameInput, { target: { value: "Jazz" } });
     fireEvent.click(screen.getByText("Save"));
 
@@ -26,9 +26,9 @@ describe("GenreCreationPopup", () => {
 
   it("submits with an undefined parent when there is no parent", () => {
     const onSubmit = vi.fn();
-    const { container } = render(<GenreCreationPopup onSubmit={onSubmit} />);
+    render(<GenreCreationPopup onSubmit={onSubmit} />);
 
-    const nameInput = container.querySelector('input[name="name"]') as HTMLInputElement;
+    const nameInput = document.body.querySelector('input[name="name"]') as HTMLInputElement;
     fireEvent.change(nameInput, { target: { value: "Blues" } });
     fireEvent.click(screen.getByText("Save"));
 

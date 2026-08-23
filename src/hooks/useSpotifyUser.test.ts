@@ -1,22 +1,30 @@
 import { describe, it, expect, beforeEach, vi } from "vitest";
 import { renderHook } from "@testing-library/react";
 
-const { fetchMock, getSpotifyRequiredCached, setSpotifyRequiredCached, clearSpotifyRequiredCached, useQueryWithParse } =
-  vi.hoisted(() => ({
+const {
+  fetchMock,
+  getSpotifyRequiredCached,
+  setSpotifyRequiredCached,
+  clearSpotifyRequiredCached,
+  useQueryWithParse,
+  FakeBackendError,
+} = vi.hoisted(() => {
+  class FakeBackendError extends Error {
+    code: string;
+    constructor(code: string) {
+      super("backend error");
+      this.code = code;
+    }
+  }
+  return {
     fetchMock: vi.fn(),
     getSpotifyRequiredCached: vi.fn(() => false),
     setSpotifyRequiredCached: vi.fn(),
     clearSpotifyRequiredCached: vi.fn(),
     useQueryWithParse: vi.fn(() => ({ data: undefined })),
-  }));
-
-class FakeBackendError extends Error {
-  code: string;
-  constructor(code: string) {
-    super("backend error");
-    this.code = code;
-  }
-}
+    FakeBackendError,
+  };
+});
 
 vi.mock("@behindthemusictree/app-kit/auth", async (importOriginal) => {
   const actual = await importOriginal<typeof import("@behindthemusictree/app-kit/auth")>();
