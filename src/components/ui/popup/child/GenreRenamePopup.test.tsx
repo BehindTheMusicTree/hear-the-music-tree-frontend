@@ -29,6 +29,17 @@ describe("GenreRenamePopup", () => {
     expect(onClose).toHaveBeenCalledTimes(1);
   });
 
+  it("submits the edited name when the form is submitted directly", () => {
+    const onSubmit = vi.fn();
+    render(<GenreRenamePopup onSubmit={onSubmit} genre={genre} />);
+
+    const nameInput = document.body.querySelector('input[name="name"]') as HTMLInputElement;
+    fireEvent.change(nameInput, { target: { value: "Metal" } });
+    fireEvent.submit(document.body.querySelector("form") as HTMLFormElement);
+
+    expect(onSubmit).toHaveBeenCalledWith({ name: "Metal" });
+  });
+
   it("renders form errors when present", () => {
     render(
       <GenreRenamePopup

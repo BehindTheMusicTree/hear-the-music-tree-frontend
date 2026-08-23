@@ -121,6 +121,26 @@ describe("Player", () => {
     expect(handleNextTrack).toHaveBeenCalled();
   });
 
+  it("updates the selected track when handleNextTrack invokes its onChange callback", () => {
+    handleNextTrack.mockImplementation((tracks, _current, onChange) => onChange(tracks[1]));
+    usePlayerMock.mockReturnValue({
+      playerTrackObject: baseTrack,
+      isLoading: false,
+      isPlaying: false,
+      volume: 50,
+      setVolume,
+      handlePlayPauseAction,
+      handleNextTrack,
+      handlePreviousTrack,
+    });
+    useTrackListMock.mockReturnValue({ trackList, selectedTrack: trackList.tracks[0], setSelectedTrack });
+
+    render(<Player />);
+    fireEvent.click(screen.getByLabelText("Next track"));
+
+    expect(setSelectedTrack).toHaveBeenCalledWith(trackList.tracks[1]);
+  });
+
   it("disables next when there is no subsequent track", () => {
     usePlayerMock.mockReturnValue({
       playerTrackObject: baseTrack,

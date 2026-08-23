@@ -35,6 +35,17 @@ describe("GenreCreationPopup", () => {
     expect(onSubmit).toHaveBeenCalledWith({ name: "Blues", parent: undefined });
   });
 
+  it("submits the entered name when the form is submitted directly", () => {
+    const onSubmit = vi.fn();
+    render(<GenreCreationPopup onSubmit={onSubmit} parent={{ uuid: "p1", name: "Rock" } as any} />);
+
+    const nameInput = document.body.querySelector('input[name="name"]') as HTMLInputElement;
+    fireEvent.change(nameInput, { target: { value: "Jazz" } });
+    fireEvent.submit(document.body.querySelector("form") as HTMLFormElement);
+
+    expect(onSubmit).toHaveBeenCalledWith({ name: "Jazz", parent: "p1" });
+  });
+
   it("renders form errors when present", () => {
     render(
       <GenreCreationPopup

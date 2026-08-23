@@ -10,6 +10,7 @@ import {
   useConnectivityError,
   AuthRequired,
   BackendError,
+  NetworkError,
   ErrorCode,
 } from "@behindthemusictree/app-kit/transport";
 
@@ -57,7 +58,11 @@ vi.mock("@components/features/player/Player", () => ({ default: () => <div data-
 vi.mock("@components/features/player/AutoAdvance", () => ({ default: () => null }));
 vi.mock("@components/auth/AuthCallbackHandler", () => ({ default: () => null }));
 
-function SetConnectivityError({ error }: { error: InstanceType<typeof AuthRequired> | InstanceType<typeof BackendError> }) {
+function SetConnectivityError({
+  error,
+}: {
+  error: InstanceType<typeof AuthRequired> | InstanceType<typeof BackendError> | InstanceType<typeof NetworkError>;
+}) {
   const { setConnectivityError } = useConnectivityError();
   useEffect(() => {
     setConnectivityError(error);
@@ -65,7 +70,9 @@ function SetConnectivityError({ error }: { error: InstanceType<typeof AuthRequir
   return null;
 }
 
-function renderWithError(error: InstanceType<typeof AuthRequired> | InstanceType<typeof BackendError>) {
+function renderWithError(
+  error: InstanceType<typeof AuthRequired> | InstanceType<typeof BackendError> | InstanceType<typeof NetworkError>,
+) {
   act(() => {
     render(
       <PopupProvider>
@@ -103,6 +110,27 @@ describe("AppContent renderer wiring and layout branches", () => {
 
     expect(screen.getByText("Authentication Failed")).toBeInTheDocument();
     expect(screen.getByText("Spotify login failed")).toBeInTheDocument();
+  });
+
+  it("shows the spotify-only AuthPopup when spotify authorization is required on a spotify-only route", () => {
+    requirementRef.current = "spotify";
+
+    renderWithError(new BackendError(ErrorCode.BACKEND_SPOTIFY_AUTHORIZATION_REQUIRED));
+
+    expect(screen.getByText("Connect with Spotify")).toBeInTheDocument();
+  });
+
+  it("shows the google AuthErrorPopup for a google authentication error", () => {
+    renderWithError(new BackendError(ErrorCode.BACKEND_GOOGLE_AUTHENTICATION_ERROR, "Google login failed"));
+
+    expect(screen.getByText("Sign-in error")).toBeInTheDocument();
+    expect(screen.getByText("Google login failed")).toBeInTheDocument();
+  });
+
+  it("shows the NetworkErrorPopup for a network error", () => {
+    renderWithError(new NetworkError(ErrorCode.NETWORK_OFFLINE));
+
+    expect(screen.getByText("Network Error")).toBeInTheDocument();
   });
 
   it("renders the track list sidebar when it is visible", () => {

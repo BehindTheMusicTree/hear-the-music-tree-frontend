@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor, fireEvent } from "@testing-library/react";
 import { PopupProvider, usePopup } from "@behindthemusictree/app-kit/popup";
 import { BackendError, ErrorCode } from "@behindthemusictree/app-kit/transport";
 
@@ -69,6 +69,12 @@ describe("SpotifyOAuthCallbackPage", () => {
     await waitFor(() =>
       expect(screen.getByText("Spotify authentication failed: access_denied")).toBeInTheDocument(),
     );
+
+    fireEvent.click(screen.getByText("Try Again"));
+
+    await waitFor(() =>
+      expect(screen.queryByText("Spotify authentication failed: access_denied")).not.toBeInTheDocument(),
+    );
   });
 
   it("shows an error popup when no code is present", async () => {
@@ -77,6 +83,12 @@ describe("SpotifyOAuthCallbackPage", () => {
     renderPage();
 
     await waitFor(() => expect(screen.getByText("No authorization code received from Spotify")).toBeInTheDocument());
+
+    fireEvent.click(screen.getByText("Try Again"));
+
+    await waitFor(() =>
+      expect(screen.queryByText("No authorization code received from Spotify")).not.toBeInTheDocument(),
+    );
   });
 
   it("redirects when the code exchange succeeds with a redirect url", async () => {
@@ -134,5 +146,9 @@ describe("SpotifyOAuthCallbackPage", () => {
     await waitFor(() =>
       expect(screen.getByText("An unexpected error occurred. Please try again later.")).toBeInTheDocument(),
     );
+
+    fireEvent.click(screen.getByText("Try Again"));
+
+    await waitFor(() => expect(routerReplace).toHaveBeenCalledWith("/"));
   });
 });

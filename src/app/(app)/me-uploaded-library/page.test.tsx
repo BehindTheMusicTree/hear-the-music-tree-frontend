@@ -134,6 +134,12 @@ describe("UploadedLibraryPage", () => {
     fireEvent.change(screen.getByTestId("file-input"), { target: { files: [file] } });
 
     expect(showPopup).toHaveBeenCalled();
+
+    fireEvent.click(screen.getByText("process file"));
+    expect(uploadTrackMutateAsync).toHaveBeenCalledWith({ file: { name: "song.mp3" } });
+
+    fireEvent.click(screen.getByText("close upload popup"));
+    expect(hidePopup).toHaveBeenCalled();
   });
 
   it("does not show the upload popup when no files are chosen", () => {
@@ -165,6 +171,13 @@ describe("UploadedLibraryPage", () => {
 
     expect(handlePlayPauseAction).toHaveBeenCalled();
     expect(playNewTrackListFromTrackUuid).not.toHaveBeenCalled();
+  });
+
+  it("no-ops when a rating star is changed", () => {
+    const { container } = render(<UploadedLibraryPage />);
+
+    const radios = container.querySelectorAll('input[type="radio"]');
+    expect(() => fireEvent.click(radios[1])).not.toThrow();
   });
 
   it("renders an empty table when there is no data", () => {
