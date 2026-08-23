@@ -35,16 +35,18 @@ RUN pnpm build
 
 FROM node:22-alpine AS runner
 WORKDIR /app
+# Coolify's post-deploy healthcheck runs curl/wget inside the container; alpine ships neither
+# reliably (no curl at all), so without this the healthcheck always fails and Coolify rolls back.
+# Retry to ride out transient Alpine mirror/TLS blips, which otherwise fail the whole build.
+RUN apk add --no-cache curl || (sleep 2 && apk add --no-cache curl) || (sleep 5 && apk add --no-cache curl)
 RUN addgroup -g 1001 -S nodejs && adduser -S nextjs -u 1001 -G nodejs
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static/
 COPY --from=builder --chown=nextjs:nodejs /app/public ./public/
 ENV PORT=3000
+# Docker auto-sets $HOSTNAME to the container ID; without this override, Next's standalone
+# server binds there instead of all interfaces, so Coolify's localhost healthcheck can't connect.
+ENV HOSTNAME=0.0.0.0
 USER nextjs
 EXPOSE 3000
-# Docker's container runtime injects its own $HOSTNAME (the container ID) into the process
-# environment at container start, overriding any build-time `ENV HOSTNAME=...`. Next's standalone
-# server reads process.env.HOSTNAME, so it ends up binding to the container ID instead of all
-# interfaces, and Coolify's localhost healthcheck gets connection refused. Setting it inline here
-# applies it at exec time, after Docker's own injection, so it actually sticks.
-CMD ["sh", "-c", "HOSTNAME=0.0.0.0 exec node server.js"]
+CMD ["node", "server.js"]
