@@ -135,6 +135,9 @@ describe("UploadedLibraryPage", () => {
 
     expect(showPopup).toHaveBeenCalled();
 
+    const popupElement = showPopup.mock.calls[0][0];
+    render(popupElement);
+
     fireEvent.click(screen.getByText("process file"));
     expect(uploadTrackMutateAsync).toHaveBeenCalledWith({ file: { name: "song.mp3" } });
 
