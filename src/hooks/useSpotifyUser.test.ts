@@ -1,11 +1,14 @@
 import { describe, it, expect, beforeEach, vi } from "vitest";
 import { renderHook } from "@testing-library/react";
 
-const fetchMock = vi.fn();
-const getSpotifyRequiredCached = vi.fn(() => false);
-const setSpotifyRequiredCached = vi.fn();
-const clearSpotifyRequiredCached = vi.fn();
-const useQueryWithParse = vi.fn(() => ({ data: undefined }));
+const { fetchMock, getSpotifyRequiredCached, setSpotifyRequiredCached, clearSpotifyRequiredCached, useQueryWithParse } =
+  vi.hoisted(() => ({
+    fetchMock: vi.fn(),
+    getSpotifyRequiredCached: vi.fn(() => false),
+    setSpotifyRequiredCached: vi.fn(),
+    clearSpotifyRequiredCached: vi.fn(),
+    useQueryWithParse: vi.fn(() => ({ data: undefined })),
+  }));
 
 class FakeBackendError extends Error {
   code: string;

@@ -1,12 +1,15 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 import { renderHook } from "@testing-library/react";
 
-const setSession = vi.fn();
-const setConnectivityError = vi.fn();
-const fetchMock = vi.fn();
-const exchangeCodeWithBackend = vi.fn();
-const resolveRedirectUri = vi.fn((uri: string) => `resolved:${uri}`);
-const storeRedirectUrl = vi.fn();
+const { setSession, setConnectivityError, fetchMock, exchangeCodeWithBackend, resolveRedirectUri, storeRedirectUrl } =
+  vi.hoisted(() => ({
+    setSession: vi.fn(),
+    setConnectivityError: vi.fn(),
+    fetchMock: vi.fn(),
+    exchangeCodeWithBackend: vi.fn(),
+    resolveRedirectUri: vi.fn((uri: string) => `resolved:${uri}`),
+    storeRedirectUrl: vi.fn(),
+  }));
 
 vi.mock("@behindthemusictree/app-kit/auth", async (importOriginal) => {
   const actual = await importOriginal<typeof import("@behindthemusictree/app-kit/auth")>();
