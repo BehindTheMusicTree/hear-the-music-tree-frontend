@@ -1,14 +1,12 @@
 import type { PlayerTrack } from "@behindthemusictree/app-kit/player";
-import type { TrackDetailed } from "@behindthemusictree/app-kit/genre-tree";
+import type { TrackDetailed } from "@lib/uploaded-track";
 
 export function toPlayerTrack(track: TrackDetailed): PlayerTrack {
-  const base = {
+  return {
+    kind: "audio",
     id: track.uuid,
     title: track.title,
     artists: track.artists?.map((artist) => ({ name: artist.name })),
+    streamUrl: "",
   };
-  if (track.kind === "youtube") {
-    return { ...base, kind: "youtube", youtubeVideoId: track.youtubeVideoId };
-  }
-  return { ...base, kind: "audio", streamUrl: "" };
 }
