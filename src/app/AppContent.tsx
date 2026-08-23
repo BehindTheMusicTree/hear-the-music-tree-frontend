@@ -6,8 +6,9 @@ import { useSpotifyAuth } from "@hooks/useSpotifyAuth";
 import { useGoogleAuth } from "@hooks/useGoogleAuth";
 import { usePopup, AUTH_POPUP_TYPE, useConnectivityErrorPopup } from "@behindthemusictree/app-kit/popup";
 import { usePlayer } from "@behindthemusictree/app-kit/player";
-import { TrackListSidebar, useTrackListSidebarVisibility } from "@behindthemusictree/app-kit/genre-tree";
+import { TrackListSidebar, useTrackListSidebarVisibility, formatTime } from "@behindthemusictree/app-kit/genre-tree";
 import { initSentry } from "@lib/sentry";
+import { UploadedTrackEditAction, UploadedTrackDetailed } from "@lib/uploaded-track";
 
 import InternalErrorPopup from "@components/ui/popup/child/InternalErrorPopup";
 import SpotifyAuthErrorPopup from "@components/ui/popup/child/SpotifyAuthErrorPopup";
@@ -83,7 +84,13 @@ export default function AppContent({ children }: { children: ReactNode }) {
               <div className="flex min-h-0 flex-1 flex-col">{children}</div>
             </main>
             {isTrackListSidebarVisible && (
-              <TrackListSidebar className="z-40" getBackendBaseUrl={getBackendBaseUrl} />
+              <TrackListSidebar
+                className="z-40"
+                renderDuration={(track: UploadedTrackDetailed) => formatTime(track.file.durationInSec)}
+                renderActions={(track: UploadedTrackDetailed) => (
+                  <UploadedTrackEditAction track={track} getBackendBaseUrl={getBackendBaseUrl} />
+                )}
+              />
             )}
           </div>
           {activePopup && (
