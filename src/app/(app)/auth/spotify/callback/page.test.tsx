@@ -1,26 +1,18 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen, waitFor } from "@testing-library/react";
+import { PopupProvider, usePopup } from "@behindthemusictree/app-kit/popup";
 import { BackendError, ErrorCode } from "@behindthemusictree/app-kit/transport";
 
-const { showPopup, hidePopup, usePopupMock, routerReplace, authToBackendFromSpotifyCode, handleSpotifyOAuth, handleGoogleOAuth } =
-  vi.hoisted(() => ({
-    showPopup: vi.fn(),
-    hidePopup: vi.fn(),
-    usePopupMock: vi.fn(),
-    routerReplace: vi.fn(),
-    authToBackendFromSpotifyCode: vi.fn(),
-    handleSpotifyOAuth: vi.fn(),
-    handleGoogleOAuth: vi.fn(),
-  }));
+const { routerReplace, authToBackendFromSpotifyCode, handleSpotifyOAuth, handleGoogleOAuth } = vi.hoisted(() => ({
+  routerReplace: vi.fn(),
+  authToBackendFromSpotifyCode: vi.fn(),
+  handleSpotifyOAuth: vi.fn(),
+  handleGoogleOAuth: vi.fn(),
+}));
 
 vi.mock("next/navigation", () => ({
   useRouter: () => ({ replace: routerReplace }),
 }));
-
-vi.mock("@behindthemusictree/app-kit/popup", async (importOriginal) => {
-  const actual = await importOriginal<typeof import("@behindthemusictree/app-kit/popup")>();
-  return { ...actual, usePopup: () => usePopupMock() };
-});
 
 vi.mock("@hooks/useSpotifyAuth", () => ({
   useSpotifyAuth: () => ({ authToBackendFromSpotifyCode, handleSpotifyOAuth }),
@@ -32,6 +24,24 @@ vi.mock("@hooks/useGoogleAuth", () => ({
 
 import SpotifyOAuthCallbackPage from "./page";
 
+function Harness() {
+  const { activePopup } = usePopup();
+  return (
+    <>
+      <SpotifyOAuthCallbackPage />
+      {activePopup}
+    </>
+  );
+}
+
+function renderPage() {
+  return render(
+    <PopupProvider>
+      <Harness />
+    </PopupProvider>,
+  );
+}
+
 function setUrl(search: string) {
   window.history.pushState({}, "", `/auth/spotify/callback${search}`);
 }
@@ -39,7 +49,6 @@ function setUrl(search: string) {
 describe("SpotifyOAuthCallbackPage", () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    usePopupMock.mockReturnValue({ showPopup, hidePopup });
     setUrl("");
   });
 
@@ -47,7 +56,7 @@ describe("SpotifyOAuthCallbackPage", () => {
     setUrl("?code=abc");
     authToBackendFromSpotifyCode.mockReturnValue(new Promise(() => {}));
 
-    render(<SpotifyOAuthCallbackPage />);
+    renderPage();
 
     expect(screen.getByText("Connecting to Spotify...")).toBeInTheDocument();
   });
@@ -55,26 +64,26 @@ describe("SpotifyOAuthCallbackPage", () => {
   it("shows an error popup when spotify reports an error param", async () => {
     setUrl("?error=access_denied");
 
-    render(<SpotifyOAuthCallbackPage />);
+    renderPage();
 
-    await waitFor(() => expect(showPopup).toHaveBeenCalled());
-    expect(screen.getByText("Spotify authentication failed: access_denied")).toBeInTheDocument();
+    await waitFor(() =>
+      expect(screen.getByText("Spotify authentication failed: access_denied")).toBeInTheDocument(),
+    );
   });
 
   it("shows an error popup when no code is present", async () => {
     setUrl("");
 
-    render(<SpotifyOAuthCallbackPage />);
+    renderPage();
 
-    await waitFor(() => expect(showPopup).toHaveBeenCalled());
-    expect(screen.getByText("No authorization code received from Spotify")).toBeInTheDocument();
+    await waitFor(() => expect(screen.getByText("No authorization code received from Spotify")).toBeInTheDocument());
   });
 
   it("redirects when the code exchange succeeds with a redirect url", async () => {
     setUrl("?code=abc");
     authToBackendFromSpotifyCode.mockResolvedValue("/me-genre-tree");
 
-    render(<SpotifyOAuthCallbackPage />);
+    renderPage();
 
     await waitFor(() => expect(routerReplace).toHaveBeenCalledWith("/me-genre-tree"));
   });
@@ -85,10 +94,9 @@ describe("SpotifyOAuthCallbackPage", () => {
       new BackendError(ErrorCode.BACKEND_SPOTIFY_AUTHENTICATION_ERROR),
     );
 
-    render(<SpotifyOAuthCallbackPage />);
+    renderPage();
 
-    await waitFor(() => expect(showPopup).toHaveBeenCalledWith(expect.anything(), "auth"));
-    expect(screen.getByText("Sign in")).toBeInTheDocument();
+    await waitFor(() => expect(screen.getByText("Sign in")).toBeInTheDocument());
     expect(routerReplace).toHaveBeenCalledWith("/");
   });
 
@@ -98,10 +106,9 @@ describe("SpotifyOAuthCallbackPage", () => {
       new BackendError(ErrorCode.BACKEND_SPOTIFY_OAUTH_INVALID_CLIENT),
     );
 
-    render(<SpotifyOAuthCallbackPage />);
+    renderPage();
 
-    await waitFor(() => expect(showPopup).toHaveBeenCalled());
-    expect(screen.getByText("Internal Error")).toBeInTheDocument();
+    await waitFor(() => expect(screen.getByText("Internal Error")).toBeInTheDocument());
     expect(routerReplace).toHaveBeenCalledWith("/");
   });
 
@@ -109,21 +116,23 @@ describe("SpotifyOAuthCallbackPage", () => {
     setUrl("?code=abc");
     authToBackendFromSpotifyCode.mockRejectedValue(new BackendError(ErrorCode.BACKEND_AUTH_ERROR));
 
-    render(<SpotifyOAuthCallbackPage />);
+    renderPage();
 
-    await waitFor(() => expect(showPopup).toHaveBeenCalled());
-    expect(
-      screen.getByText("Failed to authenticate with the backend server. Please try again later."),
-    ).toBeInTheDocument();
+    await waitFor(() =>
+      expect(
+        screen.getByText("Failed to authenticate with the backend server. Please try again later."),
+      ).toBeInTheDocument(),
+    );
   });
 
   it("shows an unexpected-error message for a non-BackendError failure", async () => {
     setUrl("?code=abc");
     authToBackendFromSpotifyCode.mockRejectedValue(new Error("boom"));
 
-    render(<SpotifyOAuthCallbackPage />);
+    renderPage();
 
-    await waitFor(() => expect(showPopup).toHaveBeenCalled());
-    expect(screen.getByText("An unexpected error occurred. Please try again later.")).toBeInTheDocument();
+    await waitFor(() =>
+      expect(screen.getByText("An unexpected error occurred. Please try again later.")).toBeInTheDocument(),
+    );
   });
 });

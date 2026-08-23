@@ -1,26 +1,18 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen, waitFor } from "@testing-library/react";
+import { PopupProvider, usePopup } from "@behindthemusictree/app-kit/popup";
 import { BackendError, ErrorCode } from "@behindthemusictree/app-kit/transport";
 
-const { showPopup, hidePopup, usePopupMock, routerReplace, authToBackendFromGoogleCode, handleSpotifyOAuth, handleGoogleOAuth } =
-  vi.hoisted(() => ({
-    showPopup: vi.fn(),
-    hidePopup: vi.fn(),
-    usePopupMock: vi.fn(),
-    routerReplace: vi.fn(),
-    authToBackendFromGoogleCode: vi.fn(),
-    handleSpotifyOAuth: vi.fn(),
-    handleGoogleOAuth: vi.fn(),
-  }));
+const { routerReplace, authToBackendFromGoogleCode, handleSpotifyOAuth, handleGoogleOAuth } = vi.hoisted(() => ({
+  routerReplace: vi.fn(),
+  authToBackendFromGoogleCode: vi.fn(),
+  handleSpotifyOAuth: vi.fn(),
+  handleGoogleOAuth: vi.fn(),
+}));
 
 vi.mock("next/navigation", () => ({
   useRouter: () => ({ replace: routerReplace }),
 }));
-
-vi.mock("@behindthemusictree/app-kit/popup", async (importOriginal) => {
-  const actual = await importOriginal<typeof import("@behindthemusictree/app-kit/popup")>();
-  return { ...actual, usePopup: () => usePopupMock() };
-});
 
 vi.mock("@hooks/useSpotifyAuth", () => ({
   useSpotifyAuth: () => ({ handleSpotifyOAuth }),
@@ -32,6 +24,24 @@ vi.mock("@hooks/useGoogleAuth", () => ({
 
 import GoogleOAuthCallbackPage from "./page";
 
+function Harness() {
+  const { activePopup } = usePopup();
+  return (
+    <>
+      <GoogleOAuthCallbackPage />
+      {activePopup}
+    </>
+  );
+}
+
+function renderPage() {
+  return render(
+    <PopupProvider>
+      <Harness />
+    </PopupProvider>,
+  );
+}
+
 function setUrl(search: string) {
   window.history.pushState({}, "", `/auth/google/callback${search}`);
 }
@@ -39,7 +49,6 @@ function setUrl(search: string) {
 describe("GoogleOAuthCallbackPage", () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    usePopupMock.mockReturnValue({ showPopup, hidePopup });
     setUrl("");
   });
 
@@ -47,7 +56,7 @@ describe("GoogleOAuthCallbackPage", () => {
     setUrl("?code=abc");
     authToBackendFromGoogleCode.mockReturnValue(new Promise(() => {}));
 
-    render(<GoogleOAuthCallbackPage />);
+    renderPage();
 
     expect(screen.getByText("Connecting with Google...")).toBeInTheDocument();
   });
@@ -55,7 +64,7 @@ describe("GoogleOAuthCallbackPage", () => {
   it("shows an inline error when google reports an error param", async () => {
     setUrl("?error=access_denied");
 
-    render(<GoogleOAuthCallbackPage />);
+    renderPage();
 
     await waitFor(() => expect(screen.getByText("Authentication Error")).toBeInTheDocument());
     expect(screen.getByText("Google authentication failed: access_denied")).toBeInTheDocument();
@@ -64,7 +73,7 @@ describe("GoogleOAuthCallbackPage", () => {
   it("shows an inline error when no code is present", async () => {
     setUrl("");
 
-    render(<GoogleOAuthCallbackPage />);
+    renderPage();
 
     await waitFor(() => expect(screen.getByText("No authorization code received from Google")).toBeInTheDocument());
   });
@@ -73,10 +82,10 @@ describe("GoogleOAuthCallbackPage", () => {
     setUrl("?code=abc");
     authToBackendFromGoogleCode.mockResolvedValue("/me-genre-tree");
 
-    const { container } = render(<GoogleOAuthCallbackPage />);
+    renderPage();
 
     await waitFor(() => expect(screen.queryByText("Connecting with Google...")).not.toBeInTheDocument());
-    expect(container).toBeEmptyDOMElement();
+    expect(document.body.textContent).toBe("");
   });
 
   it("shows the auth popup and redirects home on an expired/invalid code error", async () => {
@@ -85,10 +94,9 @@ describe("GoogleOAuthCallbackPage", () => {
       new BackendError(ErrorCode.BACKEND_GOOGLE_OAUTH_CODE_INVALID_OR_EXPIRED),
     );
 
-    render(<GoogleOAuthCallbackPage />);
+    renderPage();
 
-    await waitFor(() => expect(showPopup).toHaveBeenCalledWith(expect.anything(), "auth"));
-    expect(screen.getByText("Sign in")).toBeInTheDocument();
+    await waitFor(() => expect(screen.getByText("Sign in")).toBeInTheDocument());
     expect(routerReplace).toHaveBeenCalledWith("/");
   });
 
@@ -98,17 +106,16 @@ describe("GoogleOAuthCallbackPage", () => {
       new BackendError(ErrorCode.BACKEND_GOOGLE_OAUTH_UNAUTHORIZED_CLIENT),
     );
 
-    render(<GoogleOAuthCallbackPage />);
+    renderPage();
 
-    await waitFor(() => expect(showPopup).toHaveBeenCalled());
-    expect(screen.getByText("Internal Error")).toBeInTheDocument();
+    await waitFor(() => expect(screen.getByText("Internal Error")).toBeInTheDocument());
   });
 
   it("shows a generic backend-auth-error message for BACKEND_AUTH_ERROR", async () => {
     setUrl("?code=abc");
     authToBackendFromGoogleCode.mockRejectedValue(new BackendError(ErrorCode.BACKEND_AUTH_ERROR));
 
-    render(<GoogleOAuthCallbackPage />);
+    renderPage();
 
     await waitFor(() =>
       expect(
@@ -121,7 +128,7 @@ describe("GoogleOAuthCallbackPage", () => {
     setUrl("?code=abc");
     authToBackendFromGoogleCode.mockRejectedValue(new BackendError(ErrorCode.BACKEND_GOOGLE_OAUTH_MISCONFIGURED));
 
-    render(<GoogleOAuthCallbackPage />);
+    renderPage();
 
     await waitFor(() => expect(screen.getByText("Authentication Error")).toBeInTheDocument());
   });
@@ -130,7 +137,7 @@ describe("GoogleOAuthCallbackPage", () => {
     setUrl("?code=abc");
     authToBackendFromGoogleCode.mockRejectedValue(new Error("boom"));
 
-    render(<GoogleOAuthCallbackPage />);
+    renderPage();
 
     await waitFor(() =>
       expect(screen.getByText("An unexpected error occurred. Please try again later.")).toBeInTheDocument(),
