@@ -14,7 +14,7 @@
     "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
-    "@behindthemusictree/app-kit": "4.0.0",
+    "@behindthemusictree/app-kit": "4.0.1",
     "@behindthemusictree/brand": "11.6.0",
     "@behindthemusictree/genre-tree-view": "0.3.0",
     "@behindthemusictree/ui": "0.1.0",
