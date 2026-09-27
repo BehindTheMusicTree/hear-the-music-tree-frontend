@@ -3,6 +3,7 @@ import { TrackBaseSchema } from "@behindthemusictree/app-kit/genre-tree";
 import { FileDetailedSchema } from "./file";
 
 export const UploadedTrackDetailedSchema = TrackBaseSchema.extend({
+  archived: z.boolean(),
   relativeUrl: z.string(),
   file: FileDetailedSchema,
 });
