@@ -9,7 +9,7 @@ import {
   useUpdateGenre,
   GenreTreeView,
   CriteriaMinimum,
-  CriteriaDetailedSchema,
+  CriteriaOverviewSchema,
 } from "@behindthemusictree/app-kit/genre-tree";
 import { CriteriaPlaylistDetailedSchema } from "@lib/uploaded-track";
 import GenreCreationPopup from "@components/ui/popup/child/GenreCreationPopup";
@@ -17,14 +17,14 @@ import GenreRenamePopup from "@components/ui/popup/child/GenreRenamePopup";
 import Page from "@components/ui/Page";
 import { getBackendBaseUrl } from "@lib/site-urls";
 
-const HearCriteriaDetailedSchema = CriteriaDetailedSchema.extend({ uploadedTracksArchivedCount: z.number() });
+const HearCriteriaOverviewSchema = CriteriaOverviewSchema.extend({ uploadedTracksArchivedCount: z.number() });
 
-function renderArchivedTracks(detail: z.infer<typeof HearCriteriaDetailedSchema>) {
-  if (detail.uploadedTracksArchivedCount === 0) return null;
+function renderArchivedTracks(overview: z.infer<typeof HearCriteriaOverviewSchema>) {
+  if (overview.uploadedTracksArchivedCount === 0) return null;
   return (
     <div className="gtv-info-panel-children">
       <span className="gtv-info-panel-children-title">Archived tracks</span>
-      <p>{detail.uploadedTracksArchivedCount}</p>
+      <p>{overview.uploadedTracksArchivedCount}</p>
     </div>
   );
 }
@@ -90,7 +90,7 @@ export default function GenreTreePage() {
         handleGenreRenameAction={showGenreRenamePopup}
         getBackendBaseUrl={getBackendBaseUrl}
         criteriaPlaylistDetailedSchema={CriteriaPlaylistDetailedSchema}
-        criteriaDetailedSchema={HearCriteriaDetailedSchema}
+        criteriaOverviewSchema={HearCriteriaOverviewSchema}
         renderGenreDetailExtras={renderArchivedTracks}
       />
     </Page>

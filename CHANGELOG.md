@@ -11,6 +11,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - `CHANGELOG.md`, updated under `[Unreleased]` by every user-facing change
 
+### Changed
+
+- `@behindthemusictree/app-kit` 6.0.0 → 7.0.0: the genre tree detail panel loads from the lean `genres/{uuid}/overview/` endpoint, prefetched on hover, and opens without re-rendering the tree
+- Me genre tree: the archived-tracks count is read from the genre overview (`uploadedTracksArchivedCount`)
+
 ## [0.2.0] - 2026-08-23
 
 ### Added
