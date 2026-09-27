@@ -30,8 +30,8 @@ Commit / PR title prefixes follow Conventional Commits, matching existing histor
 
 1. Cut `release/x.y.z` from `develop` once `develop` has everything intended for
    the release.
-2. On the release branch: bump `version` in `package.json`, update the changelog
-   if present, fix anything CI/QA turns up. No new features on a release branch —
+2. On the release branch: bump `version` in `package.json`, move `CHANGELOG.md`'s
+   `[Unreleased]` entries under the new version, fix anything CI/QA turns up. No new features on a release branch —
    cut a follow-up `feature/*` into `develop` instead.
 3. Open a PR `release/x.y.z` → `main`. CI (`Lint Code`, `Run Tests`, `Build Check`)
    must pass.
