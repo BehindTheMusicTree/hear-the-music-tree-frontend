@@ -1,5 +1,8 @@
 # Project instructions for Claude Code
 
+See `README.md` for setup and `docs/ARCHITECTURE.md` for codebase structure
+(routes, API/schema layers, app-kit usage) before making changes.
+
 See `CONTRIBUTING.md` for the full branching model and release flow. Summary
 for day-to-day work in this repo:
 

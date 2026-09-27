@@ -6,13 +6,9 @@ import { queryClient, useFetchWrapper, ConnectivityErrorProvider, Scope } from "
 import { SessionProvider } from "@behindthemusictree/app-kit/auth";
 import { PopupProvider } from "@behindthemusictree/app-kit/popup";
 import { PlayerProvider, PlayerTrack } from "@behindthemusictree/app-kit/player";
-import {
-  TrackListSidebarVisibilityProvider,
-  TrackListProvider,
-  libraryEndpoints,
-  UploadedTrackDetailed,
-} from "@behindthemusictree/app-kit/genre-tree";
+import { TrackListSidebarVisibilityProvider, TrackListProvider } from "@behindthemusictree/app-kit/genre-tree";
 import { getBackendBaseUrl } from "@lib/site-urls";
+import { UploadedTrackDetailedSchema, UploadedTrackDetailed, uploadedTrackEndpoints, uploadedTrackQueryKeys } from "@lib/uploaded-track";
 
 interface ProvidersProps {
   children: NonNullable<ReactNode>;
@@ -27,12 +23,12 @@ function useLoadTrack(): (trackId: string) => Promise<PlayerTrack> {
     async (trackId: string): Promise<PlayerTrack> => {
       const requiresAuth = PLAYER_SCOPE === "me";
       const track = await fetch<UploadedTrackDetailed>(
-        libraryEndpoints[PLAYER_SCOPE].uploaded.detail(trackId),
+        uploadedTrackEndpoints.detail(trackId),
         true,
         requiresAuth,
       );
       const data = await fetch<ArrayBuffer>(
-        libraryEndpoints[PLAYER_SCOPE].uploaded.download(trackId),
+        uploadedTrackEndpoints.download(trackId),
         true,
         requiresAuth,
         {},
@@ -62,7 +58,14 @@ function AppProviders({ children }: ProvidersProps) {
     <PlayerProvider loadTrack={loadTrack}>
       <PopupProvider>
         <TrackListSidebarVisibilityProvider>
-          <TrackListProvider getBackendBaseUrl={getBackendBaseUrl}>{children}</TrackListProvider>
+          <TrackListProvider
+            getBackendBaseUrl={getBackendBaseUrl}
+            schema={UploadedTrackDetailedSchema}
+            listEndpoint={uploadedTrackEndpoints.list}
+            listQueryKey={uploadedTrackQueryKeys.list}
+          >
+            {children}
+          </TrackListProvider>
         </TrackListSidebarVisibilityProvider>
       </PopupProvider>
     </PlayerProvider>

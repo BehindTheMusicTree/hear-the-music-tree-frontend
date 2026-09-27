@@ -64,10 +64,17 @@ vi.mock("@behindthemusictree/app-kit/genre-tree", async (importOriginal) => {
     ...actual,
     useTrackList: () => useTrackListMock(),
     useListTracks: () => useListTracksMock(),
-    useUploadTrack: () => useUploadTrackMock(),
     TrackPositionPlayPause: ({ position, handlePlayPauseClick }: any) => (
       <button onClick={handlePlayPauseClick}>play-{position}</button>
     ),
+  };
+});
+
+vi.mock("@lib/uploaded-track", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("@lib/uploaded-track")>();
+  return {
+    ...actual,
+    useUploadTrack: () => useUploadTrackMock(),
   };
 });
 
@@ -75,7 +82,6 @@ import UploadedLibraryPage from "./page";
 
 const uploadedTrack = {
   uuid: "t1",
-  kind: "uploaded",
   title: "My Song",
   artists: [{ name: "Artist A" }],
   album: { name: "Album A" },
@@ -87,7 +93,6 @@ const uploadedTrack = {
 
 const uploadedTrackNoAlbumGenre = {
   uuid: "t2",
-  kind: "uploaded",
   title: "Other Song",
   artists: [],
   album: null,
@@ -114,17 +119,6 @@ describe("UploadedLibraryPage", () => {
     expect(screen.getByText("Other Song")).toBeInTheDocument();
     expect(screen.getByText("Album A")).toBeInTheDocument();
     expect(screen.getByText("Rock")).toBeInTheDocument();
-  });
-
-  it("filters out non-uploaded tracks", () => {
-    useListTracksMock.mockReturnValue({
-      data: { results: [uploadedTrack, { uuid: "s1", kind: "streamed", title: "Streamed Song" }] },
-    });
-
-    render(<UploadedLibraryPage />);
-
-    expect(screen.getByText("My Song")).toBeInTheDocument();
-    expect(screen.queryByText("Streamed Song")).not.toBeInTheDocument();
   });
 
   it("shows the upload popup when files are chosen and processes them", () => {

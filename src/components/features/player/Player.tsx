@@ -6,6 +6,7 @@ import { FaVolumeUp, FaVolumeMute, FaList } from "react-icons/fa";
 import { usePlayer, useCurrentTime, PlayerTrack } from "@behindthemusictree/app-kit/player";
 import { useTrackList, useTrackListSidebarVisibility } from "@behindthemusictree/app-kit/genre-tree";
 import { toPlayerTrack } from "@lib/player-track";
+import { UploadedTrackDetailed } from "@lib/uploaded-track";
 import PlayerControls from "./PlayerControls";
 import ProgressBar from "./ProgressBar";
 
@@ -24,7 +25,7 @@ export default function Player({ className }: PlayerProps) {
     handleNextTrack,
     handlePreviousTrack,
   } = usePlayer();
-  const { trackList, selectedTrack, setSelectedTrack } = useTrackList();
+  const { trackList, selectedTrack, setSelectedTrack } = useTrackList<UploadedTrackDetailed>();
   const currentTime = useCurrentTime();
   const { toggleTrackListSidebar, isTrackListSidebarVisible } = useTrackListSidebarVisibility();
   const [isMuted, setIsMuted] = useState(false);

@@ -10,19 +10,22 @@ import {
   TrackPositionPlayPause,
   useTrackList,
   useListTracks,
-  useUploadTrack,
   formatTime,
-  UploadedTrackDetailed,
 } from "@behindthemusictree/app-kit/genre-tree";
+import { UploadedTrackDetailed, UploadedTrackDetailedSchema, uploadedTrackEndpoints, uploadedTrackQueryKeys, useUploadTrack } from "@lib/uploaded-track";
 import Page from "@components/ui/Page";
 import { getArtistsDisplay } from "@schemas/domain/artist/display";
 import { getBackendBaseUrl } from "@lib/site-urls";
 
 export default function UploadedLibraryPage() {
-  const { data: uploadedTracksResponse } = useListTracks("me", getBackendBaseUrl);
-  const uploadedTracks = (uploadedTracksResponse?.results || []).filter(
-    (track): track is UploadedTrackDetailed => track.kind === "uploaded",
+  const { data: uploadedTracksResponse } = useListTracks(
+    "me",
+    getBackendBaseUrl,
+    UploadedTrackDetailedSchema,
+    uploadedTrackEndpoints.list,
+    uploadedTrackQueryKeys.list,
   );
+  const uploadedTracks: UploadedTrackDetailed[] = uploadedTracksResponse?.results || [];
   const { playerTrackObject, handlePlayPauseAction } = usePlayer();
   const { showPopup, hidePopup } = usePopup();
   const { playNewTrackListFromTrackUuid } = useTrackList();
