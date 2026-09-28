@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-09-28
+
+### Changed
+
+- My genre tree: playing a genre starts after its first 100 tracks load, and the queue loads more as you near the end or scroll the sidebar (app-kit 8.0.0)
+
 ## [0.3.0] - 2026-09-27
 
 ### Added
@@ -30,6 +36,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `@behindthemusictree/app-kit` 2.0.0 → 3.0.0 (uploadTrack capability, track/player type renames, error/auth popup wrappers, connectivity error handling)
 - Strict Gitflow (`develop` integration branch, `release/*`/`hotfix/*` into `main`) — see `CONTRIBUTING.md`
 
-[Unreleased]: https://github.com/BehindTheMusicTree/hear-the-music-tree-frontend/compare/v0.3.0...develop
+[Unreleased]: https://github.com/BehindTheMusicTree/hear-the-music-tree-frontend/compare/v0.4.0...develop
+[0.4.0]: https://github.com/BehindTheMusicTree/hear-the-music-tree-frontend/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/BehindTheMusicTree/hear-the-music-tree-frontend/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/BehindTheMusicTree/hear-the-music-tree-frontend/releases/tag/v0.2.0
