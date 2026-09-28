@@ -11,7 +11,6 @@ import {
   CriteriaMinimum,
   CriteriaOverviewSchema,
 } from "@behindthemusictree/app-kit/genre-tree";
-import { CriteriaPlaylistDetailedSchema } from "@lib/uploaded-track";
 import GenreCreationPopup from "@components/ui/popup/child/GenreCreationPopup";
 import GenreRenamePopup from "@components/ui/popup/child/GenreRenamePopup";
 import Page from "@components/ui/Page";
@@ -89,7 +88,6 @@ export default function GenreTreePage() {
         handleGenreCreationAction={showCriteriaCreationPopup}
         handleGenreRenameAction={showGenreRenamePopup}
         getBackendBaseUrl={getBackendBaseUrl}
-        criteriaPlaylistDetailedSchema={CriteriaPlaylistDetailedSchema}
         criteriaOverviewSchema={HearCriteriaOverviewSchema}
         renderGenreDetailExtras={renderArchivedTracks}
       />
