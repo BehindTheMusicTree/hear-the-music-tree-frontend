@@ -81,8 +81,12 @@ the route map, API/schema layers, and how the app-kit providers fit together.
   corepack), requires the `GH_PACKAGES_TOKEN_READ` BuildKit secret plus
   `NEXT_PUBLIC_*` build args (see `REQUIRED_ENV_VARS` above). Runner stage uses
   `output: "standalone"`, runs as a non-root user, exposes port 3000.
-- **Production**: deploys from `main` via Vercel auto-deploy on push (no
-  `vercel.json` in this repo — configured on Vercel directly).
+- **Coolify** (BTMT VPS): on push to `develop` (staging) or `main` (production),
+  `.github/workflows/build-and-deploy.yml` builds the image on GitHub-hosted
+  runners, pushes it to `ghcr.io/behindthemusictree/htmt-front` (`staging` /
+  `prod` tag) with build args from org-level GitHub variables, then triggers the
+  Coolify deploy. The Coolify app itself is configured by the `infrastructure`
+  repo.
 
 ## Contributing
 
