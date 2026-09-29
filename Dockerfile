@@ -12,7 +12,7 @@ RUN --mount=type=secret,id=GH_PACKAGES_TOKEN_READ \
 
 # next.config.js's REQUIRED_ENV_VARS check runs at `next build` time, so every NEXT_PUBLIC_* var it
 # needs must be passed as a build arg here, or the build fails with "Missing required environment
-# variable(s)". Coolify injects these via its buildtime_env config (see infrastructure repo).
+# variable(s)". .github/workflows/build-and-deploy.yml passes these as build args.
 ARG NEXT_PUBLIC_CONTACT_EMAIL
 ARG NEXT_PUBLIC_SPOTIFY_CLIENT_ID
 ARG NEXT_PUBLIC_SPOTIFY_SCOPES

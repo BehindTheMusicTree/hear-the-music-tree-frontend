@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.1] - 2026-09-29
+
+### Changed
+
+- **Deploy**: `build-and-deploy.yml` builds the image on GitHub-hosted runners, pushes it to GHCR (`ghcr.io/behindthemusictree/htmt-front`, `staging` / `prod` tags), and triggers the Coolify deploy, instead of Coolify building from git on the VPS. `NEXT_PUBLIC_*` build args come from org-level GitHub variables.
+
+### Removed
+
+- **Deploy**: Coolify PR preview deployments.
+
 ## [0.4.0] - 2026-09-28
 
 ### Changed

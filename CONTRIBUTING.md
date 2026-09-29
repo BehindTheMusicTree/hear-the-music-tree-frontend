@@ -41,7 +41,7 @@ Commit / PR title prefixes follow Conventional Commits, matching existing histor
 6. Merge `main` back into `develop` (or merge the release branch into `develop`)
    so `develop` picks up the version bump and any release-branch fixes.
 7. Delete the release branch.
-8. Production deploys off `main` (Vercel auto-deploys on push to `main`).
+8. Production deploys off `main` (`build-and-deploy.yml` runs on push to `main`).
 
 Hotfixes follow the same shape, but start from `main`: branch `hotfix/x.y.z`,
 fix, PR into `main`, tag, then merge back into `develop`.
