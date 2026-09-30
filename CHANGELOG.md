@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- My genre tree: genre playlists are requested with `treeName=canonical` (app-kit 8.1.0)
+
 ## [0.4.1] - 2026-09-29
 
 ### Changed
