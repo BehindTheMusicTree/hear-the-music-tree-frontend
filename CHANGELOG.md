@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - My genre tree: the stacked view renders its per-root cards again and scrolls the page instead of zooming the tree (Ctrl/Cmd+wheel still zooms); Tailwind now scans app-kit's built output so classes used only inside app-kit are generated (app-kit 8.1.2)
+- My genre tree: in stacked view, a horizontal trackpad swipe pans the tree instead of navigating back, a one-finger vertical scroll no longer nudges it, and pinch-zoom is no longer hijacked by page scroll (app-kit 8.1.3)
 
 ## [0.4.1] - 2026-09-29
 
