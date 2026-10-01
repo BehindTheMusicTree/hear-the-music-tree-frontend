@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - My genre tree: genre playlists are requested with `treeName=canonical` (app-kit 8.1.0)
 - Bumped `@behindthemusictree/app-kit` to 8.3.0: the genre details panel lists the genre playlist's tracks with infinite scroll, and clicking one plays the playlist from that track; the genre tree also gets the Google Maps-style search bar (8.2.x).
+- Bumped `@behindthemusictree/app-kit` to 8.3.1: the genre panel's track rows no longer pick up the global `button` styles (dark rounded blocks with unreadable text).
 
 ### Fixed
 
