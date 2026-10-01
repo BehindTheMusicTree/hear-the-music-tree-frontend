@@ -10,7 +10,7 @@ Authentication is via Spotify and Google OAuth.
 
 - `page.tsx` — root `/` redirects to `/me-genre-tree`.
 - `layout.tsx` — root HTML layout; loads global CSS and design-system CSS from
-  `@behindthemusictree/brand` and `@behindthemusictree/genre-tree-view`.
+  `@behindthemusictree/brand` and `@behindthemusictree/app-kit` (genre-tree styles).
 - `providers.tsx` — client providers: React Query, session (auth), popups,
   player, track list.
 - `AppContent.tsx` — app shell chrome: header, player, popups, OAuth callback

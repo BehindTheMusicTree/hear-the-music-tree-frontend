@@ -10,10 +10,10 @@ library, all with an in-app player.
 - Tailwind CSS
 - TanStack Query for server state
 - Zod for schema validation
-- D3 (via `@behindthemusictree/genre-tree-view` and player/library visualizations)
+- D3 (via `@behindthemusictree/app-kit` genre tree and player/library visualizations)
 - Sentry for error/performance monitoring
 - Internal `@behindthemusictree/*` packages: `app-kit` (shared providers/hooks/transport),
-  `brand` (design tokens/CSS/favicons), `genre-tree-view`, `ui`
+  `brand` (design tokens/CSS/favicons), `ui`
 
 ## Prerequisites
 
