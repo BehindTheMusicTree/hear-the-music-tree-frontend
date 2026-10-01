@@ -5,7 +5,7 @@ import hearTheMusicTreeFavicon from "@behindthemusictree/brand/favicons/hear-the
 import "./globals.css";
 import "@behindthemusictree/brand/tokens/theme.css";
 import "@behindthemusictree/brand/styles/icon-links.css";
-import "@behindthemusictree/genre-tree-view/styles.css";
+import "@behindthemusictree/app-kit/genre-tree/styles.css";
 
 const faviconUrl = typeof hearTheMusicTreeFavicon === "string" ? hearTheMusicTreeFavicon : hearTheMusicTreeFavicon.src;
 
