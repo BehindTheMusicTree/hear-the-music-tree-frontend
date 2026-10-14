@@ -21,7 +21,7 @@ const {
     getSpotifyRequiredCached: vi.fn(() => false),
     setSpotifyRequiredCached: vi.fn(),
     clearSpotifyRequiredCached: vi.fn(),
-    useQueryWithParse: vi.fn(() => ({ data: undefined })),
+    useQueryWithParse: vi.fn((_options: { queryFn: () => Promise<unknown> }) => ({ data: undefined })),
     FakeBackendError,
   };
 });
