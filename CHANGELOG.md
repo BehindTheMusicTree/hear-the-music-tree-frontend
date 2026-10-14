@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Security
+
+- Bump `next` to 16.3.3, `sharp` to 0.35.4, `vitest` / `@vitest/ui` to 4.1.11; override `brace-expansion`, `js-yaml`, `undici` to patched versions.
+- Add `.github/dependabot.yml` (security updates only, GitHub Packages registry).
+
 ### CI
 
 - Deploys: bumped `trigger-coolify-deploy` to v4.4.0 — a Coolify deployment stuck past an hour is cancelled (its build container force-stopped over SSH) instead of blocking every later deploy, and a failed or cancelled deploy posts an alert to the env's Discord status-alerts channel
