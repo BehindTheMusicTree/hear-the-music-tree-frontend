@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { BasePopup, BasePopupProps } from "@behindthemusictree/app-kit/popup";
+import { BasePopup, BasePopupProps } from "@behindthemusictree/app-kit-ui/popup";
 import { CriteriaMinimum } from "@behindthemusictree/app-kit/genre-tree";
 
 type GenreCreationPopupProps = Omit<BasePopupProps, "title" | "children" | "icon" | "isDismissable"> & {

@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Bumped `@behindthemusictree/app-kit` to 13.0.0 and added `@behindthemusictree/app-kit-ui` 13.0.0: styled popups, auth callback handler and genre-tree components now come from `app-kit-ui`; `app-kit` is headless (hooks, providers, schemas).
 - Bumped `@behindthemusictree/app-kit` to 12.0.0, `@behindthemusictree/brand` to 12.0.0 and `@behindthemusictree/ui` to 0.2.0 (`ui` is now a peer of app-kit, so hear owns the single installed copy).
 - My genre tree: genre playlists are requested with `treeName=canonical` (app-kit 8.1.0)
 - Bumped `@behindthemusictree/app-kit` to 8.3.0: the genre details panel lists the genre playlist's tracks with infinite scroll, and clicking one plays the playlist from that track; the genre tree also gets the Google Maps-style search bar (8.2.x).
