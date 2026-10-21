@@ -11,7 +11,7 @@ for day-to-day work in this repo:
 - `main` only receives merges from `release/*` or `hotfix/*` branches — never
   branch feature work from `main` or target `main` directly unless you're
   explicitly doing a release or hotfix.
-- CI (`.github/workflows/validate.yml`) runs Lint Code, Run Tests (with an
-  85% coverage gate — see `vitest.config.ts`), and Build Check on PRs into
+- CI (`.github/workflows/validate.yml`) runs Lint Code, Type Check, Run Tests
+  (with an 85% coverage gate — see `vitest.config.ts`), and Build Check on PRs into
   both `main` and `develop`.
 - Commit/PR prefixes: `feat:`, `fix:`, `chore:`, `ci:` (Conventional Commits).
