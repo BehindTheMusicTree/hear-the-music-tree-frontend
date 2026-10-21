@@ -30,19 +30,15 @@ vi.mock("@hooks/useGoogleAuth", () => ({
   useGoogleAuth: () => ({ authToBackendFromGoogleCode, handleGoogleOAuth }),
 }));
 
-vi.mock("@behindthemusictree/app-kit/auth", async (importOriginal) => {
-  const actual = await importOriginal<typeof import("@behindthemusictree/app-kit/auth")>();
-  return {
-    ...actual,
-    AuthCallbackHandler: ({ onReauthRequired, onOAuthMisconfigured, onSpotifyAuthError }: any) => (
-      <div>
-        <button onClick={onReauthRequired}>trigger reauth</button>
-        <button onClick={() => onOAuthMisconfigured("BAC4018")}>trigger misconfigured</button>
-        <button onClick={() => onSpotifyAuthError("Spotify failed", vi.fn())}>trigger spotify error</button>
-      </div>
-    ),
-  };
-});
+vi.mock("@behindthemusictree/app-kit-ui/auth", () => ({
+  AuthCallbackHandler: ({ onReauthRequired, onOAuthMisconfigured, onSpotifyAuthError }: any) => (
+    <div>
+      <button onClick={onReauthRequired}>trigger reauth</button>
+      <button onClick={() => onOAuthMisconfigured("BAC4018")}>trigger misconfigured</button>
+      <button onClick={() => onSpotifyAuthError("Spotify failed", vi.fn())}>trigger spotify error</button>
+    </div>
+  ),
+}));
 
 import HearAuthCallbackHandler from "./AuthCallbackHandler";
 

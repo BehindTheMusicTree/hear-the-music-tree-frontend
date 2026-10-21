@@ -35,14 +35,17 @@ vi.mock("@behindthemusictree/app-kit/popup", async (importOriginal) => {
   return {
     ...actual,
     usePopup: () => usePopupMock(),
-    TrackUploadPopup: ({ onProcessFile, onClose }: any) => (
-      <div>
-        <button onClick={() => onProcessFile({ name: "song.mp3" }, null)}>process file</button>
-        <button onClick={onClose}>close upload popup</button>
-      </div>
-    ),
   };
 });
+
+vi.mock("@behindthemusictree/app-kit-ui/popup", () => ({
+  TrackUploadPopup: ({ onProcessFile, onClose }: any) => (
+    <div>
+      <button onClick={() => onProcessFile({ name: "song.mp3" }, null)}>process file</button>
+      <button onClick={onClose}>close upload popup</button>
+    </div>
+  ),
+}));
 
 vi.mock("@behindthemusictree/ui", async (importOriginal) => {
   const actual = await importOriginal<typeof import("@behindthemusictree/ui")>();
@@ -64,6 +67,13 @@ vi.mock("@behindthemusictree/app-kit/genre-tree", async (importOriginal) => {
     ...actual,
     useTrackList: () => useTrackListMock(),
     useListTracks: () => useListTracksMock(),
+  };
+});
+
+vi.mock("@behindthemusictree/app-kit-ui/genre-tree", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("@behindthemusictree/app-kit-ui/genre-tree")>();
+  return {
+    ...actual,
     TrackPositionPlayPause: ({ position, handlePlayPauseClick }: any) => (
       <button onClick={handlePlayPauseClick}>play-{position}</button>
     ),
