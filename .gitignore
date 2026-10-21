@@ -42,3 +42,5 @@ out/
 next-env.d.ts
 
 .pr-descriptions/
+
+graphify-out/
