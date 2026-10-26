@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Genre tree artist search is turned off (`artistSearch={false}`): hear has no artist catalogue, so the search bar stays genre-only.
 - Bump `@behindthemusictree/app-kit` and `app-kit-ui` to 16.0.0; the app supplies the "track"/"tracks" noun through `TrackNounProvider`.
+- Bump `@behindthemusictree/app-kit` and `app-kit-ui` to 17.0.0 (song/track/recording unification: `RecordingDetailed` is now `SongDetailed`, the API client calls `library/songs`).
 
 ### Security
 
