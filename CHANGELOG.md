@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Bump `@behindthemusictree/app-kit` and `app-kit-ui` to 17.1.1: genre counts are no longer inflated (genre-tree-view 4.0.0 treats `itemCount` as a subtree total).
 - Bump `@behindthemusictree/app-kit` and `app-kit-ui` to 16.1.0 (segmented view-mode toggle, brand-token dark track sidebar) and remove the unused `trackListName` and `144` Tailwind keys.
 - Genre tree artist search is turned off (`artistSearch={false}`): hear has no artist catalogue, so the search bar stays genre-only.
 - Bump `@behindthemusictree/app-kit` and `app-kit-ui` to 16.0.0; the app supplies the "track"/"tracks" noun through `TrackNounProvider`.
