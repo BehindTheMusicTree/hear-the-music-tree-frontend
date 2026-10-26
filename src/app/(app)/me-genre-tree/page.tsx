@@ -4,12 +4,12 @@ import { useCallback, useEffect, useRef } from "react";
 import { z } from "zod";
 
 import { usePopup } from "@behindthemusictree/app-kit/popup";
-import { useCreateGenre, useUpdateGenre, CriteriaMinimum, CriteriaOverviewSchema, type ArtistSearchResult } from "@behindthemusictree/app-kit/genre-tree";
+import { useCreateGenre, useUpdateGenre, CriteriaMinimum, CriteriaOverviewSchema } from "@behindthemusictree/app-kit/genre-tree";
 import { GenreTreeView } from "@behindthemusictree/app-kit-ui/genre-tree";
 import GenreCreationPopup from "@components/ui/popup/child/GenreCreationPopup";
 import GenreRenamePopup from "@components/ui/popup/child/GenreRenamePopup";
 import Page from "@components/ui/Page";
-import { getBackendBaseUrl, getGrowArtistUrl, getGrowBackendBaseUrl } from "@lib/site-urls";
+import { getBackendBaseUrl } from "@lib/site-urls";
 
 const HearCriteriaOverviewSchema = CriteriaOverviewSchema.extend({ uploadedTracksArchivedCount: z.number() });
 
@@ -21,10 +21,6 @@ function renderArchivedTracks(overview: z.infer<typeof HearCriteriaOverviewSchem
       <p>{overview.uploadedTracksArchivedCount}</p>
     </div>
   );
-}
-
-function openGrowArtist(artist: ArtistSearchResult) {
-  window.open(getGrowArtistUrl(artist.uuid), "_blank", "noopener,noreferrer");
 }
 
 export default function GenreTreePage() {
@@ -87,8 +83,7 @@ export default function GenreTreePage() {
         handleGenreCreationAction={showCriteriaCreationPopup}
         handleGenreRenameAction={showGenreRenamePopup}
         getBackendBaseUrl={getBackendBaseUrl}
-        artistSearchBaseUrl={getGrowBackendBaseUrl}
-        onArtistSelect={openGrowArtist}
+        artistSearch={false}
         criteriaOverviewSchema={HearCriteriaOverviewSchema}
         renderGenreDetailExtras={renderArchivedTracks}
       />

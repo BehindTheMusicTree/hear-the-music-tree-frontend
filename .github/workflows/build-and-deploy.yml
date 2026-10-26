@@ -72,8 +72,6 @@ jobs:
             NEXT_PUBLIC_GOOGLE_REDIRECT_URI=${{ vars.GOOGLE_REDIRECT_RELATIVE_URI }}
             NEXT_PUBLIC_TRACK_UPLOAD_TIMEOUT_MS=300000
             NEXT_PUBLIC_BACKEND_BASE_URL=https://${{ vars.HTMT_API_SUBDOMAIN }}${{ env.HOST_SUFFIX }}.${{ vars.DOMAIN_NAME }}/v2/
-            NEXT_PUBLIC_GROW_API_BASE_URL=https://${{ vars.GTMT_API_SUBDOMAIN }}${{ env.HOST_SUFFIX }}.${{ vars.DOMAIN_NAME }}/v1
-            NEXT_PUBLIC_GROW_FRONT_BASE_URL=https://${{ vars.GTMT_FRONT_SUBDOMAIN }}${{ env.HOST_SUFFIX }}.${{ vars.DOMAIN_NAME }}
           secrets: |
             GH_PACKAGES_TOKEN_READ=${{ secrets.GH_PACKAGES_TOKEN_READ }}
           tags: ${{ steps.meta.outputs.tags }}
