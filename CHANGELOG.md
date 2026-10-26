@@ -7,9 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- The genre tree search bar is now "Search" and also suggests artists (aliases included); picking one opens its GrowTheMusicTree page in a new tab. Requires `NEXT_PUBLIC_GROW_API_BASE_URL` and `NEXT_PUBLIC_GROW_FRONT_BASE_URL` (build fails without them); the grow API must allow this app's origin in its CORS config. CI and the deploy build args supply them.
+
 ### Changed
 
-- Bump `@behindthemusictree/app-kit` and `app-kit-ui` to 15.0.0; the app supplies the "track"/"tracks" noun through `TrackNounProvider`.
+- Bump `@behindthemusictree/app-kit` and `app-kit-ui` to 16.0.0; the app supplies the "track"/"tracks" noun through `TrackNounProvider`.
 
 ### Security
 
