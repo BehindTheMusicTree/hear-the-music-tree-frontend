@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Bump `@behindthemusictree/app-kit` and `app-kit-ui` to 16.1.0 (segmented view-mode toggle, brand-token dark track sidebar) and remove the unused `trackListName` and `144` Tailwind keys.
 - Bump `@behindthemusictree/app-kit` and `app-kit-ui` to 16.0.0; the app supplies the "track"/"tracks" noun through `TrackNounProvider`.
 
 ### Security
