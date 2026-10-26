@@ -6,6 +6,7 @@ import { queryClient, useFetchWrapper, ConnectivityErrorProvider, Scope } from "
 import { SessionProvider } from "@behindthemusictree/app-kit/auth";
 import { PopupProvider } from "@behindthemusictree/app-kit/popup";
 import { PlayerProvider, PlayerTrack } from "@behindthemusictree/app-kit/player";
+import { TrackNounProvider } from "@behindthemusictree/app-kit/track-noun";
 import { TrackListSidebarVisibilityProvider, TrackListProvider } from "@behindthemusictree/app-kit/genre-tree";
 import { getBackendBaseUrl } from "@lib/site-urls";
 import { UploadedTrackDetailedSchema, UploadedTrackDetailed, uploadedTrackEndpoints, uploadedTrackQueryKeys } from "@lib/uploaded-track";
@@ -77,7 +78,9 @@ export default function Providers({ children }: ProvidersProps) {
     <QueryClientProvider client={queryClient}>
       <SessionProvider>
         <ConnectivityErrorProvider>
-          <AppProviders>{children}</AppProviders>
+          <TrackNounProvider singular="track" plural="tracks">
+            <AppProviders>{children}</AppProviders>
+          </TrackNounProvider>
         </ConnectivityErrorProvider>
       </SessionProvider>
     </QueryClientProvider>
