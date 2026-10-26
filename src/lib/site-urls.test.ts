@@ -52,3 +52,53 @@ describe("getBackendBaseUrl", () => {
     expect(() => getBackendBaseUrl()).toThrow("NEXT_PUBLIC_HTMT_API_ROOT_SEGMENT is required");
   });
 });
+
+describe("getGrowBackendBaseUrl", () => {
+  const originalEnv = { ...process.env };
+
+  beforeEach(() => {
+    vi.resetModules();
+    process.env = { ...originalEnv };
+  });
+
+  afterEach(() => {
+    process.env = { ...originalEnv };
+  });
+
+  it("returns NEXT_PUBLIC_GROW_API_BASE_URL", async () => {
+    process.env.NEXT_PUBLIC_GROW_API_BASE_URL = "https://grow.example.com/v1";
+    const { getGrowBackendBaseUrl } = await import("./site-urls");
+    expect(getGrowBackendBaseUrl()).toBe("https://grow.example.com/v1");
+  });
+
+  it("throws when NEXT_PUBLIC_GROW_API_BASE_URL is missing", async () => {
+    delete process.env.NEXT_PUBLIC_GROW_API_BASE_URL;
+    const { getGrowBackendBaseUrl } = await import("./site-urls");
+    expect(() => getGrowBackendBaseUrl()).toThrow("NEXT_PUBLIC_GROW_API_BASE_URL is required");
+  });
+});
+
+describe("getGrowArtistUrl", () => {
+  const originalEnv = { ...process.env };
+
+  beforeEach(() => {
+    vi.resetModules();
+    process.env = { ...originalEnv };
+  });
+
+  afterEach(() => {
+    process.env = { ...originalEnv };
+  });
+
+  it("builds the artist page URL on the grow site", async () => {
+    process.env.NEXT_PUBLIC_GROW_FRONT_BASE_URL = "https://grow.example.com";
+    const { getGrowArtistUrl } = await import("./site-urls");
+    expect(getGrowArtistUrl("abc")).toBe("https://grow.example.com/artists/abc");
+  });
+
+  it("throws when NEXT_PUBLIC_GROW_FRONT_BASE_URL is missing", async () => {
+    delete process.env.NEXT_PUBLIC_GROW_FRONT_BASE_URL;
+    const { getGrowArtistUrl } = await import("./site-urls");
+    expect(() => getGrowArtistUrl("abc")).toThrow("NEXT_PUBLIC_GROW_FRONT_BASE_URL is required");
+  });
+});
