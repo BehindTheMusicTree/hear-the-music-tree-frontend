@@ -20,16 +20,3 @@ export function getBackendBaseUrl(): string {
     isProduction: false,
   });
 }
-
-/** GrowTheMusicTree API base URL, used only for the public artist search that hear's own API lacks. */
-export function getGrowBackendBaseUrl(): string {
-  const url = process.env.NEXT_PUBLIC_GROW_API_BASE_URL;
-  if (!url) throw new Error("NEXT_PUBLIC_GROW_API_BASE_URL is required");
-  return url;
-}
-
-export function getGrowArtistUrl(artistUuid: string): string {
-  const origin = process.env.NEXT_PUBLIC_GROW_FRONT_BASE_URL;
-  if (!origin) throw new Error("NEXT_PUBLIC_GROW_FRONT_BASE_URL is required");
-  return `${origin}/artists/${artistUuid}`;
-}
