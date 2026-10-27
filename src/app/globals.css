@@ -52,12 +52,6 @@ body {
   overflow-x: hidden;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
@@ -75,12 +69,4 @@ h3 {
 
 input {
   background-color: rgba(255, 255, 255, 0.862);
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
 }
