@@ -45,6 +45,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Buttons without their own background no longer render with a dark fill and extra padding from a leftover global `button` rule, which is removed from `globals.css`.
+- Links without their own color class inherit the surrounding text color instead of the Vite template's purple; the unused template classes (`.card`, `.read-the-docs`) are removed from `globals.css`.
 
 ## [0.4.1] - 2026-09-29
 
