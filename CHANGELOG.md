@@ -9,7 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Bump `@behindthemusictree/app-kit` and `app-kit-ui` to 17.2.0: songs without a YouTube video show a crossed-out YouTube icon instead of the "No video available" text.
+- Bump `@behindthemusictree/app-kit` and `app-kit-ui` to 18.0.0: songs without a YouTube video show a crossed-out YouTube icon instead of the "No video available" text, and the shared buttons no longer depend on a global `button` rule.
+- The player's mute and track-list buttons declare their own padding and radius instead of inheriting them from the global `button` rule.
 - Bump `@behindthemusictree/app-kit` and `app-kit-ui` to 17.1.1: genre counts are no longer inflated (genre-tree-view 4.0.0 treats `itemCount` as a subtree total).
 - Bump `@behindthemusictree/app-kit` and `app-kit-ui` to 16.1.0 (segmented view-mode toggle, brand-token dark track sidebar) and remove the unused `trackListName` and `144` Tailwind keys.
 - Genre tree artist search is turned off (`artistSearch={false}`): hear has no artist catalogue, so the search bar stays genre-only.
@@ -40,6 +41,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - My genre tree: the stacked view renders its per-root cards again and scrolls the page instead of zooming the tree (Ctrl/Cmd+wheel still zooms); Tailwind now scans app-kit's built output so classes used only inside app-kit are generated (app-kit 8.1.2)
 - My genre tree: in stacked view, a horizontal trackpad swipe pans the tree instead of navigating back, a one-finger vertical scroll no longer nudges it, and pinch-zoom is no longer hijacked by page scroll (app-kit 8.1.3)
 - My genre tree: genre-tree styles now come from app-kit's bundled genre-tree-view instead of the stale direct `genre-tree-view` 0.3.0 dependency (removed), so the floating zoom controls are styled
+
+### Fixed
+
+- Buttons without their own background no longer render with a dark fill and extra padding from a leftover global `button` rule, which is removed from `globals.css`.
 
 ## [0.4.1] - 2026-09-29
 
