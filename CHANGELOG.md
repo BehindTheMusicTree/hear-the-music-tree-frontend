@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **One spacing system**: the `:root { font-size: 14px }` override is removed, so the app renders on the browser's default 16px root (about 14% larger). Tailwind uses the `@behindthemusictree/brand` preset. Bumps `@behindthemusictree/app-kit` and `app-kit-ui` to 18.3.0 and `@behindthemusictree/brand` to 12.2.0, which size everything in rem.
 - Bump `@behindthemusictree/app-kit` and `app-kit-ui` to 18.0.0: songs without a YouTube video show a crossed-out YouTube icon instead of the "No video available" text, and the shared buttons no longer depend on a global `button` rule.
 - The player's mute and track-list buttons declare their own padding and radius instead of inheriting them from the global `button` rule.
 - Bump `@behindthemusictree/app-kit` and `app-kit-ui` to 17.1.1: genre counts are no longer inflated (genre-tree-view 4.0.0 treats `itemCount` as a subtree total).
