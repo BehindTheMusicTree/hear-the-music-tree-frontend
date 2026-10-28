@@ -19,6 +19,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Bump `@behindthemusictree/app-kit` and `app-kit-ui` to 16.0.0; the app supplies the "track"/"tracks" noun through `TrackNounProvider`.
 - Bump `@behindthemusictree/app-kit` and `app-kit-ui` to 17.0.0 (song/track/recording unification: `RecordingDetailed` is now `SongDetailed`, the API client calls `library/songs`).
 
+### Fixed
+
+- Local `pnpm test` and `pnpm lint` no longer pick up code in `.claude/worktrees/` (which would load a second React copy and fail the worktree's tests).
+
 ### Security
 
 - Bump `next` to 16.3.3, `sharp` to 0.35.4, `vitest` / `@vitest/ui` to 4.1.11; override `brace-expansion`, `js-yaml`, `undici` to patched versions.
