@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- pnpm is pinned to 10.33.2 through `package.json`'s `packageManager`, which local pnpm, CI and the Docker build all read, and the dependency overrides move to `pnpm-workspace.yaml`. A newer global pnpm (11+) no longer drops the overrides and rewrites `pnpm-lock.yaml`.
 - Bump `@behindthemusictree/app-kit` and `app-kit-ui` to 18.5.2 and `@behindthemusictree/brand` to 12.4.0: the player panel follows the shared right-column width.
 - **One spacing system**: the `:root { font-size: 14px }` override is removed, so the app renders on the browser's default 16px root (about 14% larger). Tailwind uses the `@behindthemusictree/brand` preset. Bumps `@behindthemusictree/app-kit` and `app-kit-ui` to 18.3.0 and `@behindthemusictree/brand` to 12.2.0, which size everything in rem.
 - Bump `@behindthemusictree/app-kit` and `app-kit-ui` to 18.0.0: songs without a YouTube video show a crossed-out YouTube icon instead of the "No video available" text, and the shared buttons no longer depend on a global `button` rule.
