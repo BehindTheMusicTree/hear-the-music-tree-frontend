@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Security
+
+- Patched the open Dependabot alerts: bumped `next`, `@sentry/nextjs`, `vitest` (and `@vitest/*`), `happy-dom`, `sharp`, `postcss` and `uuid`, and added overrides in `pnpm-workspace.yaml` for the transitive `brace-expansion`, `fast-uri`, `nanoid`, `postcss-selector-parser`, `source-map-js`, `undici`, `vite` and `zod` 4. The dead npm `overrides` block in `package.json`, which pnpm never read, is removed. `zod` 3 (required by app-kit) has no patched 3.x release and stays flagged.
+
 ### Changed
 
 - pnpm is pinned to 10.33.2 through `package.json`'s `packageManager`, which local pnpm, CI and the Docker build all read, and the dependency overrides move to `pnpm-workspace.yaml`. A newer global pnpm (11+) no longer drops the overrides and rewrites `pnpm-lock.yaml`.
