@@ -18,7 +18,7 @@ library, all with an in-app player.
 ## Prerequisites
 
 - Node 20+ (Node 22 is used for the Docker build)
-- [pnpm](https://pnpm.io/) 10.33.2 (via `corepack enable`)
+- [pnpm](https://pnpm.io/): the version pinned in `package.json`'s `packageManager`, which pnpm and corepack pick automatically
 - Read access to the `@behindthemusictree` scope on GitHub Packages — set an
   `NPM_TOKEN`/`GH_PACKAGES_TOKEN_READ` env var per `.npmrc` before installing
 
