@@ -1,5 +1,7 @@
 # Project instructions for Claude Code
 
+Ecosystem map (which repo owns what, where UI changes go): `~/git/claude-config/CONVENTIONS.md` § Ecosystem.
+
 See `README.md` for setup and `docs/ARCHITECTURE.md` for codebase structure
 (routes, API/schema layers, app-kit usage) before making changes.
 
