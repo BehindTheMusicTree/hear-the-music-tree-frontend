@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 import { BasePopup, BasePopupProps } from "@behindthemusictree/app-kit-ui/popup";
-import { CriteriaMinimum } from "@behindthemusictree/app-kit/genre-tree";
+import { CriteriaMinimum, GenreUuid } from "@behindthemusictree/app-kit/genre-tree";
 
 type GenreCreationPopupProps = Omit<BasePopupProps, "title" | "children" | "icon" | "isDismissable"> & {
-  onSubmit: (values: { name: string; parent?: string }) => void;
+  onSubmit: (values: { name: string; parent?: GenreUuid }) => void;
   onClose?: () => void;
   formErrors?: { field: string; message: string }[];
   parent?: CriteriaMinimum | null;
