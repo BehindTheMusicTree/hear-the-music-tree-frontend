@@ -14,18 +14,17 @@ overrides:
   source-map-js@1: ^1.2.2
   undici@7: ^7.30.1
   vite: ^7.3.7
-  zod@4: ^4.6.6
 
 importers:
 
   .:
     dependencies:
       '@behindthemusictree/app-kit':
-        specifier: 24.0.0
-        version: 24.0.0(@tanstack/react-query@5.72.2(react@19.1.0))(next@16.4.3(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(@types/node@26.6.6)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+        specifier: 24.0.1
+        version: 24.0.1(@tanstack/react-query@5.72.2(react@19.1.0))(next@16.4.3(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(@types/node@26.6.6)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@behindthemusictree/app-kit-ui':
-        specifier: 24.0.0
-        version: 24.0.0(@behindthemusictree/app-kit@24.0.0(@tanstack/react-query@5.72.2(react@19.1.0))(next@16.4.3(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(@types/node@26.6.6)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(@behindthemusictree/ui@0.7.0(@behindthemusictree/brand@12.4.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(@tanstack/react-query@5.72.2(react@19.1.0))(next@16.4.3(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(@types/node@26.6.6)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+        specifier: 24.0.1
+        version: 24.0.1(@behindthemusictree/app-kit@24.0.1(@tanstack/react-query@5.72.2(react@19.1.0))(next@16.4.3(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(@types/node@26.6.6)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(@behindthemusictree/ui@0.7.0(@behindthemusictree/brand@12.4.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(@tanstack/react-query@5.72.2(react@19.1.0))(next@16.4.3(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(@types/node@26.6.6)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@behindthemusictree/brand':
         specifier: 12.4.0
         version: 12.4.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -69,7 +68,7 @@ importers:
         specifier: 11.1.1
         version: 11.1.1
       zod:
-        specifier: ^4.6.6
+        specifier: 4.6.7
         version: 4.6.7
     devDependencies:
       '@tanstack/react-query-devtools':
@@ -266,18 +265,18 @@ packages:
     resolution: {integrity: sha512-6zABk/ECA/QYSCQ1NGiVwwbQerUCZ+TQbp64Q3AgmfNvurHH0j8TtXa1qbShXA6qqkpAj4V5W8pP6mLe1mcMqA==}
     engines: {node: '>=18'}
 
-  '@behindthemusictree/app-kit-ui@24.0.0':
-    resolution: {integrity: sha512-Fu6dcOeCkasWXTIsDHRqqfo00eriYW5ieZU+tWAXxNK3AXJNyChc57nSY7XFvSnX7Lu+qrm0dVUlH1T42RDJng==, tarball: https://npm.pkg.github.com/download/@behindthemusictree/app-kit-ui/24.0.0/085508dee5933267dd1447201af2342005a175a4}
+  '@behindthemusictree/app-kit-ui@24.0.1':
+    resolution: {integrity: sha512-24puxmDxcA5vZTKyLPfhqB8WDjxJr0OYwRvbWDP3JlR3URK5CkeH3k4CFNTwB6XFABg5HW/vK8OMnn8Q10B7wg==, tarball: https://npm.pkg.github.com/download/@behindthemusictree/app-kit-ui/24.0.1/f77737e308aa1d2e02ab79afaa34b181abe88e6d}
     peerDependencies:
-      '@behindthemusictree/app-kit': ^24.0.0
+      '@behindthemusictree/app-kit': ^24.0.1
       '@behindthemusictree/ui': ^0.7.0
       '@tanstack/react-query': '>=5.0.0'
       next: '>=14.0.0'
       react: '>=18.0.0'
       react-dom: '>=18.0.0'
 
-  '@behindthemusictree/app-kit@24.0.0':
-    resolution: {integrity: sha512-qvLXWuDY8PEvJTabtH8Ft6oAFFLVnXH0gh9PjJVpmJF4IWH73/E691tX3OYaR7TzVkwmPFz7ZBUCFxOKFmFGmQ==, tarball: https://npm.pkg.github.com/download/@behindthemusictree/app-kit/24.0.0/2f974871dd687de277afaf6b228495b9d4e699b6}
+  '@behindthemusictree/app-kit@24.0.1':
+    resolution: {integrity: sha512-M9buJ5tS5iee5OQWVtfyeb6PuYCPcKK4B7ws/6jFWcijWO0YAB2b/aWi8QkxG//sKadc4oYPgpdLESND0JMJQA==, tarball: https://npm.pkg.github.com/download/@behindthemusictree/app-kit/24.0.1/cd86da949c9142a8b87abb520b0a8b075335be38}
     peerDependencies:
       '@tanstack/react-query': '>=5.0.0'
       next: '>=14.0.0'
@@ -302,6 +301,9 @@ packages:
       '@behindthemusictree/brand': ^12.0.0
       react: '>=18.0.0'
       react-dom: '>=18.0.0'
+    peerDependenciesMeta:
+      '@behindthemusictree/brand':
+        optional: true
 
   '@csstools/color-helpers@6.1.0':
     resolution: {integrity: sha512-064IFJdjTfUqnjpCVpMOdbr8FLQBhinbZj6yRv2An2E41O/pLEXqfFRWqGq/SxlE5PEUYTlvWsG2r8MswAVvkg==}
@@ -4107,7 +4109,7 @@ packages:
     resolution: {integrity: sha512-Q6/nZLe6jxuU80qb/4uJ4t5v2VEZ44lzQjPDhYJNztRQ4wyWc6VF3D3Kb/fAuPetZQnhS3hnajCf9CsWesghLQ==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
-      zod: ^4.6.6
+      zod: ^3.25.0 || ^4.0.0
 
   zod@4.6.7:
     resolution: {integrity: sha512-g8W2D2kU6a8untc053fX1uVBKzM7yqAxW/3zwk83+6RyF2+SKOuV+c0wBDhUwzV1PaGapmZH+rmcUzPf+3CGwg==}
@@ -4254,9 +4256,9 @@ snapshots:
 
   '@bcoe/v8-coverage@1.0.2': {}
 
-  '@behindthemusictree/app-kit-ui@24.0.0(@behindthemusictree/app-kit@24.0.0(@tanstack/react-query@5.72.2(react@19.1.0))(next@16.4.3(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(@types/node@26.6.6)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(@behindthemusictree/ui@0.7.0(@behindthemusictree/brand@12.4.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(@tanstack/react-query@5.72.2(react@19.1.0))(next@16.4.3(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(@types/node@26.6.6)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+  '@behindthemusictree/app-kit-ui@24.0.1(@behindthemusictree/app-kit@24.0.1(@tanstack/react-query@5.72.2(react@19.1.0))(next@16.4.3(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(@types/node@26.6.6)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(@behindthemusictree/ui@0.7.0(@behindthemusictree/brand@12.4.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(@tanstack/react-query@5.72.2(react@19.1.0))(next@16.4.3(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(@types/node@26.6.6)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
     dependencies:
-      '@behindthemusictree/app-kit': 24.0.0(@tanstack/react-query@5.72.2(react@19.1.0))(next@16.4.3(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(@types/node@26.6.6)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@behindthemusictree/app-kit': 24.0.1(@tanstack/react-query@5.72.2(react@19.1.0))(next@16.4.3(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(@types/node@26.6.6)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@behindthemusictree/genre-tree-view': 5.0.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@behindthemusictree/ui': 0.7.0(@behindthemusictree/brand@12.4.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@tanstack/react-query': 5.72.2(react@19.1.0)
@@ -4270,7 +4272,7 @@ snapshots:
       uuid: 11.1.1
       zod: 4.6.7
 
-  '@behindthemusictree/app-kit@24.0.0(@tanstack/react-query@5.72.2(react@19.1.0))(next@16.4.3(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(@types/node@26.6.6)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+  '@behindthemusictree/app-kit@24.0.1(@tanstack/react-query@5.72.2(react@19.1.0))(next@16.4.3(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(@types/node@26.6.6)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
     dependencies:
       '@tanstack/react-query': 5.72.2(react@19.1.0)
       next: 16.4.3(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(@types/node@26.6.6)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -4293,7 +4295,6 @@ snapshots:
 
   '@behindthemusictree/ui@0.7.0(@behindthemusictree/brand@12.4.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
     dependencies:
-      '@behindthemusictree/brand': 12.4.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       class-variance-authority: 0.7.1
       clsx: 2.1.1
       lucide-react: 0.487.0(react@19.1.0)
@@ -4301,6 +4302,8 @@ snapshots:
       react-dom: 19.1.0(react@19.1.0)
       react-icons: 5.5.0(react@19.1.0)
       tailwind-merge: 3.2.0
+    optionalDependencies:
+      '@behindthemusictree/brand': 12.4.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
 
   '@csstools/color-helpers@6.1.0': {}
 
