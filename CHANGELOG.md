@@ -9,11 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 
-- Patched the open Dependabot alerts: bumped `next`, `@sentry/nextjs`, `vitest` (and `@vitest/*`), `happy-dom`, `sharp`, `postcss` and `uuid`, and added overrides in `pnpm-workspace.yaml` for the transitive `brace-expansion`, `fast-uri`, `nanoid`, `postcss-selector-parser`, `source-map-js`, `undici`, `vite` and `zod` 4. The dead npm `overrides` block in `package.json`, which pnpm never read, is removed.
+- Patched the open Dependabot alerts: bumped `next`, `@sentry/nextjs`, `vitest` (and `@vitest/*`), `happy-dom`, `sharp`, `postcss` and `uuid`, and added overrides in `pnpm-workspace.yaml` for the transitive `brace-expansion`, `fast-uri`, `nanoid`, `postcss-selector-parser`, `source-map-js`, `undici` and `vite`. The dead npm `overrides` block in `package.json`, which pnpm never read, is removed.
 
 ### Changed
 
-- Bump `@behindthemusictree/app-kit` and `app-kit-ui` to 24.0.0 and `zod` to 4.6.6, which closes the last zod advisory, and `@behindthemusictree/ui` to 0.7.0 (required by app-kit-ui 21+). Genre creation takes the branded `GenreUuid` for the parent.
+- Bump `@behindthemusictree/app-kit` and `app-kit-ui` to 24.0.1 (http(s)-only URL fields) and pin `zod` to 4.6.7, which closes the last zod advisory, and `@behindthemusictree/ui` to 0.7.0 (required by app-kit-ui 21+). Genre creation takes the branded `GenreUuid` for the parent.
 - pnpm is pinned to 10.33.2 through `package.json`'s `packageManager`, which local pnpm, CI and the Docker build all read, and the dependency overrides move to `pnpm-workspace.yaml`. A newer global pnpm (11+) no longer drops the overrides and rewrites `pnpm-lock.yaml`.
 - Bump `@behindthemusictree/app-kit` and `app-kit-ui` to 18.5.2 and `@behindthemusictree/brand` to 12.4.0: the player panel follows the shared right-column width.
 - **One spacing system**: the `:root { font-size: 14px }` override is removed, so the app renders on the browser's default 16px root (about 14% larger). Tailwind uses the `@behindthemusictree/brand` preset. Bumps `@behindthemusictree/app-kit` and `app-kit-ui` to 18.3.0 and `@behindthemusictree/brand` to 12.2.0, which size everything in rem.
