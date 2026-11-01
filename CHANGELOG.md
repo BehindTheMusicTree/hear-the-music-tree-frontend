@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Share project guidance and the launch skill between Claude and Codex, with CI checking for drift.
 - Bump `@behindthemusictree/app-kit` and `app-kit-ui` to 24.0.1 (http(s)-only URL fields) and pin `zod` to 4.6.7, which closes the last zod advisory, and `@behindthemusictree/ui` to 0.7.0 (required by app-kit-ui 21+). Genre creation takes the branded `GenreUuid` for the parent.
 - pnpm is pinned to 10.33.2 through `package.json`'s `packageManager`, which local pnpm, CI and the Docker build all read, and the dependency overrides move to `pnpm-workspace.yaml`. A newer global pnpm (11+) no longer drops the overrides and rewrites `pnpm-lock.yaml`.
 - Bump `@behindthemusictree/app-kit` and `app-kit-ui` to 18.5.2 and `@behindthemusictree/brand` to 12.4.0: the player panel follows the shared right-column width.
