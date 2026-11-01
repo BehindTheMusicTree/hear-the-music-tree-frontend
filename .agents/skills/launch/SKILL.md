@@ -19,7 +19,7 @@ Requires read access to the `@behindthemusictree` GitHub Packages scope — set 
 ## 2. Env setup (first run, or after `.env.example` changes)
 
 ```bash
-cp .env.example .env.local   # then fill in the required values
+test -e .env.local || cp .env.example .env.local   # then fill in the required values
 ```
 
 `next.config.js` fails the build if any `REQUIRED_ENV_VARS` are missing:
