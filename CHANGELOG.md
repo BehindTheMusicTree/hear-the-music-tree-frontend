@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.0] - 2026-11-01
+
 ### Security
 
 - Patched the open Dependabot alerts: bumped `next`, `@sentry/nextjs`, `vitest` (and `@vitest/*`), `happy-dom`, `sharp`, `postcss` and `uuid`, and added overrides in `pnpm-workspace.yaml` for the transitive `brace-expansion`, `fast-uri`, `nanoid`, `postcss-selector-parser`, `source-map-js`, `undici` and `vite`. The dead npm `overrides` block in `package.json`, which pnpm never read, is removed.
