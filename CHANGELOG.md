@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Install `@behindthemusictree/*` from the public npmjs registry: no GitHub token is needed to install, build or run CI. Removed the `GH_PACKAGES_TOKEN_READ` build secret, the CI token guard and the Dependabot registry, and dropped the retired `assets` package from `transpilePackages`.
+
 ## [0.5.0] - 2026-11-01
 
 ### Security

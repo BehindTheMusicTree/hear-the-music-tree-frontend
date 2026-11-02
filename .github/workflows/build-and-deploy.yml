@@ -3,8 +3,7 @@
 # so develop and main each build their own image (`staging` / `prod` tag), which Coolify deploys.
 # Requires org-level vars CONTACT_EMAIL, HTMT_API_SUBDOMAIN, SPOTIFY_CLIENT_ID_PROD/_STAGING, SPOTIFY_SCOPES,
 # SPOTIFY_REDIRECT_RELATIVE_URI, GOOGLE_CLIENT_ID_PROD/_STAGING, GOOGLE_REDIRECT_RELATIVE_URI,
-# COOLIFY_API_SUBDOMAIN, DOMAIN_NAME, DEPLOY_SSH_HOST, APP_ORIGIN_IP and org-level secrets COOLIFY_API_TOKEN, GH_PACKAGES_TOKEN_READ (private
-# @behindthemusictree packages; GITHUB_TOKEN can't read another repo's packages).
+# COOLIFY_API_SUBDOMAIN, DOMAIN_NAME, DEPLOY_SSH_HOST, APP_ORIGIN_IP and org-level secrets COOLIFY_API_TOKEN.
 name: Build and deploy
 
 on:
@@ -72,8 +71,6 @@ jobs:
             NEXT_PUBLIC_GOOGLE_REDIRECT_URI=${{ vars.GOOGLE_REDIRECT_RELATIVE_URI }}
             NEXT_PUBLIC_TRACK_UPLOAD_TIMEOUT_MS=300000
             NEXT_PUBLIC_BACKEND_BASE_URL=https://${{ vars.HTMT_API_SUBDOMAIN }}${{ env.HOST_SUFFIX }}.${{ vars.DOMAIN_NAME }}/v2/
-          secrets: |
-            GH_PACKAGES_TOKEN_READ=${{ secrets.GH_PACKAGES_TOKEN_READ }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha

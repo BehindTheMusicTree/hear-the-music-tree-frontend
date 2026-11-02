@@ -15,7 +15,7 @@ vars are missing, so env setup always comes before `pnpm dev`.
 pnpm install
 ```
 
-Requires read access to the `@behindthemusictree` GitHub Packages scope — set `NPM_TOKEN` so `.npmrc` can authenticate before installing (in CI this is typically provided via the `GH_PACKAGES_TOKEN_READ` secret).
+The `@behindthemusictree` packages are public on npmjs; no token is needed to install.
 ## 2. Env setup (first run, or after `.env.example` changes)
 
 ```bash
