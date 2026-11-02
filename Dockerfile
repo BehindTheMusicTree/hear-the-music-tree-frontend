@@ -3,12 +3,7 @@ FROM node:22-alpine AS builder
 WORKDIR /app
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc ./
 RUN corepack enable && corepack install
-RUN --mount=type=secret,id=GH_PACKAGES_TOKEN_READ \
-    if [ ! -s /run/secrets/GH_PACKAGES_TOKEN_READ ]; then \
-        echo "ERROR: GH_PACKAGES_TOKEN_READ build secret is not provided" >&2; \
-        exit 1; \
-    fi && \
-    NPM_TOKEN="$(cat /run/secrets/GH_PACKAGES_TOKEN_READ)" pnpm install --frozen-lockfile
+RUN pnpm install --frozen-lockfile
 
 # next.config.js's REQUIRED_ENV_VARS check runs at `next build` time, so every NEXT_PUBLIC_* var it
 # needs must be passed as a build arg here, or the build fails with "Missing required environment
