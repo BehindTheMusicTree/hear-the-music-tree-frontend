@@ -76,8 +76,8 @@ the route map, API/schema layers, and how the app-kit providers fit together.
 ## Deployment
 
 - **Docker**: multi-stage `Dockerfile`, builder on `node:22-alpine` (pnpm via
-  corepack), requires the
-  `NEXT_PUBLIC_*` build args (see `REQUIRED_ENV_VARS` above). Runner stage uses
+  corepack), requires the `NEXT_PUBLIC_*` build args
+  (see `REQUIRED_ENV_VARS` above). Runner stage uses
   `output: "standalone"`, runs as a non-root user, exposes port 3000.
 - **Coolify** (BTMT VPS): on push to `develop` (staging) or `main` (production),
   `.github/workflows/build-and-deploy.yml` builds the image on GitHub-hosted
