@@ -3,7 +3,7 @@
 # so develop and main each build their own image (`staging` / `prod` tag), which Coolify deploys.
 # Requires org-level vars CONTACT_EMAIL, HTMT_API_SUBDOMAIN, SPOTIFY_CLIENT_ID_PROD/_STAGING, SPOTIFY_SCOPES,
 # SPOTIFY_REDIRECT_RELATIVE_URI, GOOGLE_CLIENT_ID_PROD/_STAGING, GOOGLE_REDIRECT_RELATIVE_URI,
-# COOLIFY_API_SUBDOMAIN, DOMAIN_NAME, SERVER_HOST and org-level secrets COOLIFY_API_TOKEN, GH_PACKAGES_TOKEN_READ (private
+# COOLIFY_API_SUBDOMAIN, DOMAIN_NAME, DEPLOY_SSH_HOST, APP_ORIGIN_IP and org-level secrets COOLIFY_API_TOKEN, GH_PACKAGES_TOKEN_READ (private
 # @behindthemusictree packages; GITHUB_TOKEN can't read another repo's packages).
 name: Build and deploy
 
@@ -87,15 +87,19 @@ jobs:
     environment: STAGING
     steps:
       - name: Trigger htmt-front deploy
-        uses: BehindTheMusicTree/github-workflows/.github/actions/trigger-coolify-deploy@v4.3.4
+        uses: BehindTheMusicTree/github-workflows/.github/actions/trigger-coolify-deploy@v4.4.0
         with:
           app_name: htmt-front
           coolify_environment: staging
           coolify_subdomain: ${{ vars.COOLIFY_API_SUBDOMAIN }}
           domain: ${{ vars.DOMAIN_NAME }}
           coolify_api_token: ${{ secrets.COOLIFY_API_TOKEN }}
+          server_host: ${{ vars.DEPLOY_SSH_HOST }}
+          server_deploy_username: ${{ secrets.SERVER_DEPLOY_USERNAME }}
+          server_deploy_ssh_private_key: ${{ secrets.SERVER_DEPLOY_SSH_PRIVATE_KEY }}
+          discord_webhook_url: ${{ secrets.DISCORD_WEBHOOK_URL_STATUS_ALERTS }}
           health_check_path: /health
-          health_check_origin_ip: ${{ vars.SERVER_HOST }}
+          health_check_origin_ip: ${{ vars.APP_ORIGIN_IP }}
 
   deploy-prod:
     name: Deploy (prod)
@@ -105,12 +109,16 @@ jobs:
     environment: PROD
     steps:
       - name: Trigger htmt-front deploy
-        uses: BehindTheMusicTree/github-workflows/.github/actions/trigger-coolify-deploy@v4.3.4
+        uses: BehindTheMusicTree/github-workflows/.github/actions/trigger-coolify-deploy@v4.4.0
         with:
           app_name: htmt-front
           coolify_environment: production
           coolify_subdomain: ${{ vars.COOLIFY_API_SUBDOMAIN }}
           domain: ${{ vars.DOMAIN_NAME }}
           coolify_api_token: ${{ secrets.COOLIFY_API_TOKEN }}
+          server_host: ${{ vars.DEPLOY_SSH_HOST }}
+          server_deploy_username: ${{ secrets.SERVER_DEPLOY_USERNAME }}
+          server_deploy_ssh_private_key: ${{ secrets.SERVER_DEPLOY_SSH_PRIVATE_KEY }}
+          discord_webhook_url: ${{ secrets.DISCORD_WEBHOOK_URL_STATUS_ALERTS_PROD }}
           health_check_path: /health
-          health_check_origin_ip: ${{ vars.SERVER_HOST }}
+          health_check_origin_ip: ${{ vars.APP_ORIGIN_IP }}

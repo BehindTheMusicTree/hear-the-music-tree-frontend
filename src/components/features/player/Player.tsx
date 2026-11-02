@@ -131,7 +131,7 @@ export default function Player({ className }: PlayerProps) {
             <div className="flex items-center space-x-2">
               <button
                 onClick={handleVolumeToggle}
-                className="text-gray-400 hover:text-white bg-transparent transition-colors"
+                className="p-3 rounded-lg text-gray-400 hover:text-white bg-transparent transition-colors"
                 aria-label={isMuted ? "Unmute" : "Mute"}
               >
                 {isMuted ? <FaVolumeMute size={16} /> : <FaVolumeUp size={16} />}
@@ -147,7 +147,7 @@ export default function Player({ className }: PlayerProps) {
             </div>
             <button
               onClick={toggleTrackListSidebar}
-              className={`bg-transparent transition-colors ${
+              className={`p-3 rounded-lg bg-transparent transition-colors ${
                 isTrackListSidebarVisible ? "text-white" : "text-gray-400 hover:text-white"
               }`}
               aria-label="Toggle tracklist"

@@ -40,7 +40,7 @@ describe("GenrePlaylistsPage", () => {
   });
 
   it("renders playlist rows, defaulting parent to '/' and rendering an empty root when absent", () => {
-    useListFullGenrePlaylistsMock.mockReturnValue({ data: { results: playlists }, isPending: false, error: null });
+    useListFullGenrePlaylistsMock.mockReturnValue({ data: playlists, isPending: false, error: null });
 
     render(<GenrePlaylistsPage />);
 
@@ -51,7 +51,7 @@ describe("GenrePlaylistsPage", () => {
   });
 
   it("filters rows by name", () => {
-    useListFullGenrePlaylistsMock.mockReturnValue({ data: { results: playlists }, isPending: false, error: null });
+    useListFullGenrePlaylistsMock.mockReturnValue({ data: playlists, isPending: false, error: null });
 
     render(<GenrePlaylistsPage />);
 
@@ -63,7 +63,7 @@ describe("GenrePlaylistsPage", () => {
   });
 
   it("filters rows by uuid, parent, and root", () => {
-    useListFullGenrePlaylistsMock.mockReturnValue({ data: { results: playlists }, isPending: false, error: null });
+    useListFullGenrePlaylistsMock.mockReturnValue({ data: playlists, isPending: false, error: null });
 
     render(<GenrePlaylistsPage />);
     const [uuidInput, , parentInput, rootInput] = screen.getAllByPlaceholderText("Filter...");

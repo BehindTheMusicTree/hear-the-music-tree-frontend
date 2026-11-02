@@ -33,7 +33,7 @@ Commit / PR title prefixes follow Conventional Commits, matching existing histor
 2. On the release branch: bump `version` in `package.json`, move `CHANGELOG.md`'s
    `[Unreleased]` entries under the new version, fix anything CI/QA turns up. No new features on a release branch —
    cut a follow-up `feature/*` into `develop` instead.
-3. Open a PR `release/x.y.z` → `main`. CI (`Lint Code`, `Run Tests`, `Build Check`)
+3. Open a PR `release/x.y.z` → `main`. CI (`Lint Code`, `Type Check`, `Run Tests`, `Build Check`)
    must pass.
 4. Merge the PR (merge commit, not squash) once approved.
 5. Tag the resulting commit on `main` as `vX.Y.Z` and cut a GitHub Release from
@@ -48,8 +48,8 @@ fix, PR into `main`, tag, then merge back into `develop`.
 
 ## Before opening a PR
 
-- `pnpm lint` and `pnpm test:coverage` locally (or rely on CI — both run on every
-  PR).
+- `pnpm lint`, `pnpm typecheck` and `pnpm test:coverage` locally (or rely on CI — all run on
+  every PR).
 - Coverage thresholds (85% lines/functions/branches/statements, see
   `vitest.config.ts`) are enforced in CI; add tests for new code paths rather
   than lowering the threshold.

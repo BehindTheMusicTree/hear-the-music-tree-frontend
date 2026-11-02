@@ -1,7 +1,7 @@
 "use client";
 
 import { ComponentProps } from "react";
-import { SpotifyAuthErrorPopup as AppKitSpotifyAuthErrorPopup } from "@behindthemusictree/app-kit/popup";
+import { SpotifyAuthErrorPopup as AppKitSpotifyAuthErrorPopup } from "@behindthemusictree/app-kit-ui/popup";
 
 type SpotifyAuthErrorPopupProps = Omit<ComponentProps<typeof AppKitSpotifyAuthErrorPopup>, "contactEmail">;
 

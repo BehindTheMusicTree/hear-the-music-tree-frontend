@@ -1,7 +1,8 @@
 "use client";
 
-import { formatTime, Rating } from "@behindthemusictree/app-kit/genre-tree";
-import { BasePopup, BasePopupProps } from "@behindthemusictree/app-kit/popup";
+import { formatTime } from "@behindthemusictree/app-kit/genre-tree";
+import { Rating } from "@behindthemusictree/app-kit-ui/genre-tree";
+import { BasePopup, BasePopupProps } from "@behindthemusictree/app-kit-ui/popup";
 import { Button } from "@behindthemusictree/ui";
 import { UploadedTrackUpdateValues } from "./schemas/update";
 import { UploadedTrackDetailed } from "./schemas/detailed";

@@ -1,8 +1,8 @@
 # syntax=docker/dockerfile:1
 FROM node:22-alpine AS builder
 WORKDIR /app
-RUN corepack enable && corepack prepare pnpm@10.33.2 --activate
-COPY package.json pnpm-lock.yaml .npmrc ./
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc ./
+RUN corepack enable && corepack install
 RUN --mount=type=secret,id=GH_PACKAGES_TOKEN_READ \
     if [ ! -s /run/secrets/GH_PACKAGES_TOKEN_READ ]; then \
         echo "ERROR: GH_PACKAGES_TOKEN_READ build secret is not provided" >&2; \

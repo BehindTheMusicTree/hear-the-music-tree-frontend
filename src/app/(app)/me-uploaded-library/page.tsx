@@ -3,15 +3,11 @@
 import { FaRegClock } from "react-icons/fa";
 
 import { usePlayer } from "@behindthemusictree/app-kit/player";
-import { usePopup, TrackUploadPopup } from "@behindthemusictree/app-kit/popup";
+import { usePopup } from "@behindthemusictree/app-kit/popup";
+import { TrackUploadPopup } from "@behindthemusictree/app-kit-ui/popup";
 import { UploadButtons } from "@behindthemusictree/ui";
-import {
-  Rating,
-  TrackPositionPlayPause,
-  useTrackList,
-  useListTracks,
-  formatTime,
-} from "@behindthemusictree/app-kit/genre-tree";
+import { useTrackList, useListTracks, formatTime } from "@behindthemusictree/app-kit/genre-tree";
+import { Rating, TrackPositionPlayPause } from "@behindthemusictree/app-kit-ui/genre-tree";
 import { UploadedTrackDetailed, UploadedTrackDetailedSchema, uploadedTrackEndpoints, uploadedTrackQueryKeys, useUploadTrack } from "@lib/uploaded-track";
 import Page from "@components/ui/Page";
 import { getArtistsDisplay } from "@schemas/domain/artist/display";

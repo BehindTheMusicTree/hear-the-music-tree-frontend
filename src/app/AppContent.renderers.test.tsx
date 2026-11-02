@@ -39,9 +39,12 @@ vi.mock("@behindthemusictree/app-kit/genre-tree", async (importOriginal) => {
   return {
     ...actual,
     useTrackListSidebarVisibility: () => ({ isTrackListSidebarVisible: sidebarVisibleRef.current }),
-    TrackListSidebar: () => <div data-testid="sidebar-marker" />,
   };
 });
+
+vi.mock("@behindthemusictree/app-kit-ui/genre-tree", () => ({
+  TrackListSidebar: () => <div data-testid="sidebar-marker" />,
+}));
 
 vi.mock("@hooks/useSpotifyAuth", () => ({
   useSpotifyAuth: () => ({ handleSpotifyOAuth: vi.fn() }),

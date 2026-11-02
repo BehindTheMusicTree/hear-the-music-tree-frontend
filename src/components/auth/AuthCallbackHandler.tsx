@@ -1,6 +1,6 @@
 "use client";
 
-import { AuthCallbackHandler } from "@behindthemusictree/app-kit/auth";
+import { AuthCallbackHandler } from "@behindthemusictree/app-kit-ui/auth";
 import { ErrorCode } from "@behindthemusictree/app-kit/transport";
 import { usePopup, AUTH_POPUP_TYPE } from "@behindthemusictree/app-kit/popup";
 import { useSpotifyAuth } from "@hooks/useSpotifyAuth";

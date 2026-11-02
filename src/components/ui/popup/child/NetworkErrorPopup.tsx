@@ -1,1 +1,1 @@
-export { NetworkErrorPopup as default } from "@behindthemusictree/app-kit/popup";
+export { NetworkErrorPopup as default } from "@behindthemusictree/app-kit-ui/popup";

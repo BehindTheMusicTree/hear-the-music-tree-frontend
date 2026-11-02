@@ -4,13 +4,8 @@ import { useCallback, useEffect, useRef } from "react";
 import { z } from "zod";
 
 import { usePopup } from "@behindthemusictree/app-kit/popup";
-import {
-  useCreateGenre,
-  useUpdateGenre,
-  GenreTreeView,
-  CriteriaMinimum,
-  CriteriaOverviewSchema,
-} from "@behindthemusictree/app-kit/genre-tree";
+import { useCreateGenre, useUpdateGenre, CriteriaMinimum, CriteriaOverviewSchema, GenreUuid } from "@behindthemusictree/app-kit/genre-tree";
+import { GenreTreeView } from "@behindthemusictree/app-kit-ui/genre-tree";
 import GenreCreationPopup from "@components/ui/popup/child/GenreCreationPopup";
 import GenreRenamePopup from "@components/ui/popup/child/GenreRenamePopup";
 import Page from "@components/ui/Page";
@@ -38,7 +33,7 @@ export default function GenreTreePage() {
       showPopup(
         <GenreCreationPopup
           parent={parent}
-          onSubmit={({ name, parent }: { name: string; parent?: string }) => {
+          onSubmit={({ name, parent }: { name: string; parent?: GenreUuid }) => {
             createGenre({ name, parent });
             hidePopup();
           }}
@@ -88,6 +83,7 @@ export default function GenreTreePage() {
         handleGenreCreationAction={showCriteriaCreationPopup}
         handleGenreRenameAction={showGenreRenamePopup}
         getBackendBaseUrl={getBackendBaseUrl}
+        artistSearch={false}
         criteriaOverviewSchema={HearCriteriaOverviewSchema}
         renderGenreDetailExtras={renderArchivedTracks}
       />

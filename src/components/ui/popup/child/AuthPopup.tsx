@@ -1,7 +1,7 @@
 "use client";
 
 import { ComponentProps } from "react";
-import { AuthPopup as AppKitAuthPopup } from "@behindthemusictree/app-kit/popup";
+import { AuthPopup as AppKitAuthPopup } from "@behindthemusictree/app-kit-ui/popup";
 
 type AuthPopupProps = Omit<ComponentProps<typeof AppKitAuthPopup>, "spotifyOnlyDescription" | "defaultDescription">;
 

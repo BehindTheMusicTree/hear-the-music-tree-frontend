@@ -1,9 +1,15 @@
 /** @type {import('tailwindcss').Config} */
+import brandPreset from "@behindthemusictree/brand/tailwind-preset";
 
 const playerHeight = "80px";
 const bannerHeight = "64px";
 const config = {
-  content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
+  presets: [brandPreset],
+  content: [
+    "./index.html",
+    "./src/**/*.{vue,js,ts,jsx,tsx}",
+    "./node_modules/@behindthemusictree/**/dist/**/*.{js,cjs}",
+  ],
   theme: {
     extend: {
       colors: {
@@ -27,7 +33,6 @@ const config = {
       },
       maxWidth: {
         xl: "44rem",
-        trackListName: "440px",
       },
       scale: {
         120: "1.2",
@@ -47,7 +52,6 @@ const config = {
         menuitem: "45px",
       },
       width: {
-        144: "50rem",
         playingbar: "5px",
         menuitem: "45px",
       },

@@ -15,15 +15,18 @@ vi.mock("@behindthemusictree/app-kit/genre-tree", async (importOriginal) => {
     ...actual,
     useCreateGenre: () => useCreateGenreMock(),
     useUpdateGenre: () => useUpdateGenreMock(),
-    GenreTreeView: ({ handleGenreCreationAction, handleGenreRenameAction }: any) => (
-      <div>
-        <button onClick={() => handleGenreCreationAction()}>Add root genre</button>
-        <button onClick={() => handleGenreCreationAction({ uuid: "p1", name: "Rock" })}>Add subgenre</button>
-        <button onClick={() => handleGenreRenameAction({ uuid: "g1", name: "OldName" })}>Rename genre</button>
-      </div>
-    ),
   };
 });
+
+vi.mock("@behindthemusictree/app-kit-ui/genre-tree", () => ({
+  GenreTreeView: ({ handleGenreCreationAction, handleGenreRenameAction }: any) => (
+    <div>
+      <button onClick={() => handleGenreCreationAction()}>Add root genre</button>
+      <button onClick={() => handleGenreCreationAction({ uuid: "p1", name: "Rock" })}>Add subgenre</button>
+      <button onClick={() => handleGenreRenameAction({ uuid: "g1", name: "OldName" })}>Rename genre</button>
+    </div>
+  ),
+}));
 
 import GenreTreePage from "./page";
 

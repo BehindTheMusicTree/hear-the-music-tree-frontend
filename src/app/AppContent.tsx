@@ -6,7 +6,8 @@ import { useSpotifyAuth } from "@hooks/useSpotifyAuth";
 import { useGoogleAuth } from "@hooks/useGoogleAuth";
 import { usePopup, AUTH_POPUP_TYPE, useConnectivityErrorPopup } from "@behindthemusictree/app-kit/popup";
 import { usePlayer } from "@behindthemusictree/app-kit/player";
-import { TrackListSidebar, useTrackListSidebarVisibility, formatTime } from "@behindthemusictree/app-kit/genre-tree";
+import { useTrackListSidebarVisibility, formatTime } from "@behindthemusictree/app-kit/genre-tree";
+import { TrackListSidebar } from "@behindthemusictree/app-kit-ui/genre-tree";
 import { initSentry } from "@lib/sentry";
 import { UploadedTrackEditAction, UploadedTrackDetailed } from "@lib/uploaded-track";
 

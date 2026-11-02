@@ -13,15 +13,15 @@ export default function GenrePlaylistsPage() {
   const [rootFilter, setRootFilter] = useState("");
   const [uuidFilter, setUuidFilter] = useState("");
   const filteredData = useMemo(() => {
-    if (!data?.results) return [];
-    return data.results.filter((criteriaPlaylist) => {
+    if (!data) return [];
+    return data.filter((criteriaPlaylist) => {
       const uuidMatch = criteriaPlaylist.uuid.toLowerCase().includes(uuidFilter.toLowerCase());
       const nameMatch = criteriaPlaylist.name.toLowerCase().includes(nameFilter.toLowerCase());
       const parentMatch = (criteriaPlaylist.parent?.name || "/").toLowerCase().includes(parentFilter.toLowerCase());
       const rootMatch = (criteriaPlaylist.root?.name || "").toLowerCase().includes(rootFilter.toLowerCase());
       return uuidMatch && nameMatch && parentMatch && rootMatch;
     });
-  }, [data?.results, nameFilter, parentFilter, rootFilter, uuidFilter]);
+  }, [data, nameFilter, parentFilter, rootFilter, uuidFilter]);
 
   if (error) {
     return (
