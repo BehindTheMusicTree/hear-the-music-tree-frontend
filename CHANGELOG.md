@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### CI
 
+- Preserve complete release notes when Markdown examples contain version headings.
+
 - Prepare releases through reviewed version and changelog changes; CI creates version tags and publishes GitHub notes only after lint, type, coverage and build checks.
 
 ### Changed
