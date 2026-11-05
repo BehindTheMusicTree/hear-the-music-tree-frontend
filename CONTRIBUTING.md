@@ -36,15 +36,21 @@ Commit / PR title prefixes follow Conventional Commits, matching existing histor
 3. Open a PR `release/x.y.z` → `main`. CI (`Lint Code`, `Type Check`, `Run Tests`, `Build Check`)
    must pass.
 4. Merge the PR (merge commit, not squash) once approved.
-5. Tag the resulting commit on `main` as `vX.Y.Z` and cut a GitHub Release from
-   the tag with the changelog entry.
+5. CI validates the canonical package version, matching nonempty changelog and main ancestry,
+   then creates the annotated `vX.Y.Z` tag on that exact merged commit. The tag runs the same
+   lint, type, coverage and build checks before publishing the GitHub Release from the changelog.
+   Rerun a failed workflow to recover; an existing release is retained. Do not tag or publish locally.
 6. Merge `main` back into `develop` (or merge the release branch into `develop`)
    so `develop` picks up the version bump and any release-branch fixes.
 7. Delete the release branch.
 8. Production deploys off `main` (`build-and-deploy.yml` runs on push to `main`).
 
 Hotfixes follow the same shape, but start from `main`: branch `hotfix/x.y.z`,
-fix, PR into `main`, tag, then merge back into `develop`.
+fix, PR into `main`, let CI tag and publish, then merge back into `develop`.
+
+Initial adoption preserves version 0.5.0 and creates no tag. App access and tag protections are
+activated separately through `github-config` once this contract reaches `main`. This migration
+does not change the deployment workflows or introduce npm publication.
 
 ## Before opening a PR
 
