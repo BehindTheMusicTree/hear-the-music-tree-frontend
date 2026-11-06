@@ -1,8 +1,8 @@
-# pnpm install needs GH_PACKAGES_TOKEN_READ: GITHUB_TOKEN cannot read @behindthemusictree/* when published from another repo (403 read_package).
 name: Validate
 
 on:
   push:
+    tags: ["v[0-9]*.[0-9]*.[0-9]*"]
     branches:
       - main
       - develop
@@ -14,25 +14,10 @@ on:
 permissions:
   contents: read
 
-env:
-  NPM_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN_READ }}
-
 jobs:
-  ensure-packages-token:
-    name: GitHub Packages token
-    runs-on: ubuntu-latest
-    steps:
-      - name: Require GH_PACKAGES_TOKEN_READ secret
-        run: |
-          if [ -z "$NPM_TOKEN" ]; then
-            echo "::error::Repository secret GH_PACKAGES_TOKEN_READ is required. Add a GitHub PAT with read:packages (and org SSO if applicable) so pnpm install can install @behindthemusictree/*. GITHUB_TOKEN cannot read packages published from other repositories (403 permission_denied: read_package)."
-            exit 1
-          fi
-
   lint:
     name: Lint Code
     runs-on: ubuntu-latest
-    needs: [ensure-packages-token]
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -55,7 +40,6 @@ jobs:
   typecheck:
     name: Type Check
     runs-on: ubuntu-latest
-    needs: [ensure-packages-token]
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -87,7 +71,6 @@ jobs:
   test:
     name: Run Tests
     runs-on: ubuntu-latest
-    needs: [ensure-packages-token]
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -138,3 +121,10 @@ jobs:
           NEXT_PUBLIC_GOOGLE_REDIRECT_URI: https://ci.example.com/auth/google/callback
           NEXT_PUBLIC_TRACK_UPLOAD_TIMEOUT_MS: "300000"
         run: pnpm run build
+
+  publish:
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
+    needs: build-check
+    permissions:
+      contents: write
+    uses: BehindTheMusicTree/github-workflows/.github/workflows/release-github.yml@7857565a0fbbf7a4569147044d14eb7350df82c3

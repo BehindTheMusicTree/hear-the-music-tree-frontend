@@ -266,7 +266,7 @@ packages:
     engines: {node: '>=18'}
 
   '@behindthemusictree/app-kit-ui@24.0.1':
-    resolution: {integrity: sha512-24puxmDxcA5vZTKyLPfhqB8WDjxJr0OYwRvbWDP3JlR3URK5CkeH3k4CFNTwB6XFABg5HW/vK8OMnn8Q10B7wg==, tarball: https://npm.pkg.github.com/download/@behindthemusictree/app-kit-ui/24.0.1/f77737e308aa1d2e02ab79afaa34b181abe88e6d}
+    resolution: {integrity: sha512-lFtV52EBSr9LCQ+XgtE95x3tkNH7fcQniZYvOEqZmnhYtBgnX8DSQNkImTJ2/sRT0zgO7C3z8QnFs16xEzapYA==}
     peerDependencies:
       '@behindthemusictree/app-kit': ^24.0.1
       '@behindthemusictree/ui': ^0.7.0
@@ -276,7 +276,7 @@ packages:
       react-dom: '>=18.0.0'
 
   '@behindthemusictree/app-kit@24.0.1':
-    resolution: {integrity: sha512-M9buJ5tS5iee5OQWVtfyeb6PuYCPcKK4B7ws/6jFWcijWO0YAB2b/aWi8QkxG//sKadc4oYPgpdLESND0JMJQA==, tarball: https://npm.pkg.github.com/download/@behindthemusictree/app-kit/24.0.1/cd86da949c9142a8b87abb520b0a8b075335be38}
+    resolution: {integrity: sha512-rC/QnYwqDhwTYoxfppkNv38Kc4Vt6Cl6tulV1SE7po9PlAEJCq8S5YkmiKJAFdvwNv5gH/zKN/loYCs7xJAuOw==}
     peerDependencies:
       '@tanstack/react-query': '>=5.0.0'
       next: '>=14.0.0'
@@ -284,19 +284,19 @@ packages:
       react-dom: '>=18.0.0'
 
   '@behindthemusictree/brand@12.4.0':
-    resolution: {integrity: sha512-ViTTkCKqRSbUDb8RN45GVjY36R14N2zqi2zT/WJNJwSgKSOVUrozJQLsZnHBueM2VLMqbk7bIE/76IgAKGx8ag==, tarball: https://npm.pkg.github.com/download/@behindthemusictree/brand/12.4.0/15ec8d773262e4d34009b1aec5d82a128354bc31}
+    resolution: {integrity: sha512-4XVCmQSY1778t8L85g1talhce61DelRfDsp/8h84lOhjf5Mbz9eIn/AJOTbrZBjvKbZzWo1xdJ4Pm1OcOCza0A==}
     peerDependencies:
       react: '>=18.0.0'
       react-dom: '>=18.0.0'
 
   '@behindthemusictree/genre-tree-view@5.0.0':
-    resolution: {integrity: sha512-+CpGOKQ7le1DbkdpAPOR+61BBkd8bJ0nFOyAm3u6I9YhdA3otI9OTXbCAZrVsvGB77e5Q8XPasiPL96d8dHdNA==, tarball: https://npm.pkg.github.com/download/@behindthemusictree/genre-tree-view/5.0.0/bb948ae9e04a66d4e905c9ad0f476a5691733c72}
+    resolution: {integrity: sha512-UxbIsduRqsRw7jDASoxFDg05xp5XTUaT/lggEgBoy4zYFf/UUGdhR8QzCxivziqP6WJpHaH6gdu3yTHRuMhfqw==}
     peerDependencies:
       react: '>=18.0.0'
       react-dom: '>=18.0.0'
 
   '@behindthemusictree/ui@0.7.0':
-    resolution: {integrity: sha512-6zViMCxFc5wwbQnAroUDxuvv8IsYMybaUDoyx10U9H6X0TWkZf5hOIcE2HS7DtiF0bPFrrVlAaEXQLAJSaTt8w==, tarball: https://npm.pkg.github.com/download/@behindthemusictree/ui/0.7.0/dc22d3791bcd276539c34c9cb2efcc9c12c75878}
+    resolution: {integrity: sha512-tY9V8kFdORSxnTaXTCFMN02r7Zj8xTBLyu9fOecT3np0xjuk46vDeAiqxja/axSq95V3u+xpC1FjqO7LBlerEA==}
     peerDependencies:
       '@behindthemusictree/brand': ^12.0.0
       react: '>=18.0.0'
