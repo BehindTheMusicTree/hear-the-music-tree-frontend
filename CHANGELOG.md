@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### CI
+
+- Add the canonical workflow `concurrency` groups to `agent-drift`, `validate` and `release-tag`.
+
 ### Fixed
 
 - **Agent directories**: Keep plans and scratch data out of Git while tracking the directory ignore rules.
