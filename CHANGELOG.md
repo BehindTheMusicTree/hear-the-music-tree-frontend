@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### CI
 
+- Pushes and pull requests run the `org-conformance` check (github-workflows v6.5.0), which `required-checks.json` in github-config declares as an optional job.
 - Add the canonical workflow `concurrency` groups to `agent-drift`, `validate` and `release-tag`.
 
 ### Fixed
