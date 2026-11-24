@@ -14,6 +14,10 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: validate-${{ github.event_name == 'pull_request' && format('pr-{0}', github.event.pull_request.number) || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   lint:
     name: Lint Code
@@ -127,4 +131,4 @@ jobs:
     needs: build-check
     permissions:
       contents: write
-    uses: BehindTheMusicTree/github-workflows/.github/workflows/release-github.yml@7857565a0fbbf7a4569147044d14eb7350df82c3
+    uses: BehindTheMusicTree/github-workflows/.github/workflows/release-github.yml@79c136234b5d487bb99e0cd2050f38f6b3e06747

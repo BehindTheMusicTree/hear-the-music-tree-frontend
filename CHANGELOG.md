@@ -7,6 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.2] - 2026-11-24
+
+### CI
+
+- Pushes and pull requests run the `org-conformance` check (github-workflows v6.5.0), which `required-checks.json` in github-config declares as an optional job.
+- Add the canonical workflow `concurrency` groups to `agent-drift`, `validate` and `release-tag`.
+
+### Fixed
+
+- **Agent directories**: Keep plans and scratch data out of Git while tracking the directory ignore rules.
+
+### Removed
+
+- Drop the tracked `.agent-plans/.gitignore`: plans now live in the common git directory.
+
+### CI
+
+- Pin the shared release workflows to the lag-tolerant github-workflows commit 79c1362, so tag creation tolerates GitHub read-after-write delays.
+
 ## [0.5.1] - 2026-11-06
 
 ### CI
