@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### CI
+
+- Add a `Tests success` gate job to `validate` that fails unless `Run Tests` succeeded, so branch protection can require one stable check (BehindTheMusicTree/github-config#97).
+
 ## [0.5.2] - 2026-11-24
 
 ### CI
