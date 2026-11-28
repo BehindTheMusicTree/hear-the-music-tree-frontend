@@ -126,6 +126,17 @@ jobs:
           NEXT_PUBLIC_TRACK_UPLOAD_TIMEOUT_MS: "300000"
         run: pnpm run build
 
+  tests-success:
+    name: Tests success
+    needs: [test]
+    if: always()
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Require tests to pass
+        env:
+          NEEDS: ${{ toJSON(needs) }}
+        run: jq -e 'all(.[]; .result == "success")' <<<"$NEEDS"
+
   publish:
     if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
     needs: build-check
